@@ -63,5 +63,5 @@ const seo = () => ({
 // base './' makes the built site work under any GitHub Pages URL (user.github.io/repo-name/)
 export default defineConfig({
   plugins: [react(), injectCsp(), seo()],
-  base: './',
+  base: '/',
 });
