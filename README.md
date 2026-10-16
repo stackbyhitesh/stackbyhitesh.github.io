@@ -54,6 +54,13 @@ Put images in `src/assets/achievements/`, named after the `slug` of each award i
 Cards without an image show a medal placeholder. Clicking a card with an image opens it full size (arrow keys move between awards, Esc closes).
 `sample-images/` has illustrative artwork for previewing the layout. **Replace it with your real award photos before publishing.**
 
+**Images not showing?** The "Click an award to view it full size" line only appears when at least one image is found.
+1. The image must be inside `src/assets/achievements/` (not `sample-images/` and not `public/`).
+2. The file name must match the award: `heros`, `prodigy`, `super-achiever`, `tech-titan`. Capital letters, spaces, dashes and underscores are ignored, so `Super Achiever.PNG` also works. Supported types: jpg, jpeg, png, webp, avif, gif.
+3. Make sure the files are committed and pushed: `git add src/assets/achievements` then commit and push.
+4. While running `npm run dev`, the browser console shows which award images were found and which are missing.
+5. Quick test: copy the four files from `sample-images/` into `src/assets/achievements/`.
+
 ## Experience counter
 Years and months of experience are calculated from today's date (hero text, "What I do" text and the stats strip). The start date is `CAREER_START` in `src/lib/experience.ts` (September 2018).
 Within one month of a whole year it shows "about N years" and "~N"; otherwise the exact value, for example "8 years and 3 months" and "8+".
@@ -64,6 +71,14 @@ Within one month of a whole year it shows "about N years" and "~N"; otherwise th
 - `testimonials`: add quotes (for example from LinkedIn recommendations, with permission) and a "Kind words" section appears.
 - `topicOptions`: the choices in the contact form's "What's it about?" menu. The choice is added to the email subject.
 - `public/hitesh-chaudhari.vcf`: the "Save my contact" card. Edit it if your details change.
+
+## Updating an existing repository from the older JavaScript version
+If you copy this project over an older version of the site, delete the old JavaScript files first. Leftovers such as `vite.config.js` or `src/**/*.jsx` sit next to the new `.ts` / `.tsx` files and break lint, typecheck or the build.
+```bash
+git rm -f vite.config.js
+git ls-files 'src/*.js' 'src/*.jsx' | xargs git rm -f
+```
+(On Windows without `xargs`, delete those files in your editor.) Then run `npm install`, `npm run typecheck`, `npm run lint` and `npm test` before pushing.
 
 ## Put it live for free (GitHub Pages)
 1. Create a **public** repository on github.com (for example `portfolio`).

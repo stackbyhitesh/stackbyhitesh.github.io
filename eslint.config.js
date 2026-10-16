@@ -21,5 +21,6 @@ export default tseslint.config(
       'react/no-unescaped-entities': 'off',
     },
   },
-  { files: ['vite.config.ts', 'eslint.config.js'], languageOptions: { globals: { ...globals.node } } },
+  // Root config files (vite.config.*, eslint.config.*) run in Node, so `process` and friends are allowed.
+  { files: ['*.config.{js,mjs,cjs,ts}'], languageOptions: { globals: { ...globals.node } } },
 );

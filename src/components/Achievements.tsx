@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Reveal, { stagger } from './Reveal';
 import { achievements } from '../data';
-import { achievementImages } from '../lib/achievementImages';
+import { findAchievementImage } from '../lib/achievementImages';
 
 interface LightboxProps {
   index: number;
@@ -10,9 +10,10 @@ interface LightboxProps {
 }
 
 // Only awards that have an image can be opened full size.
-const withImages = achievements
-  .filter((a) => achievementImages[a.slug])
-  .map((a) => ({ ...a, src: achievementImages[a.slug] }));
+const withImages = achievements.flatMap((a) => {
+  const src = findAchievementImage(a.slug);
+  return src ? [{ ...a, src }] : [];
+});
 
 function Medal() {
   return (
