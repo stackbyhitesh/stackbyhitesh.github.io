@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { getExperience } from './experience';
 
-const at = (y, m) => getExperience(new Date(y, m - 1, 15)); // month is 1-12
+const at = (y: number, m: number) => getExperience(new Date(y, m - 1, 15)); // month is 1-12
 
 describe('getExperience (career start Sep 2018)', () => {
   it('shows an exact whole year without "about"', () => {

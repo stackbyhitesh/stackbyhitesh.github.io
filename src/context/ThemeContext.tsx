@@ -1,19 +1,25 @@
-import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { safeStorage } from '../lib/storage';
+import type { Theme } from '../types';
 
 const KEY = 'theme';
-const THEMES = ['dark', 'light'];
+const THEMES: readonly Theme[] = ['dark', 'light'];
 
 /** Saved choice if there is one, otherwise the dark design. */
-export const getInitialTheme = () => {
+export const getInitialTheme = (): Theme => {
   const saved = safeStorage.get(KEY);
-  return THEMES.includes(saved) ? saved : 'dark';
+  return THEMES.includes(saved as Theme) ? (saved as Theme) : 'dark';
 };
 
-const ThemeContext = createContext(null);
+interface ThemeValue {
+  theme: Theme;
+  toggle: () => void;
+}
 
-export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(getInitialTheme);
+const ThemeContext = createContext<ThemeValue | null>(null);
+
+export function ThemeProvider({ children }: { children: ReactNode }) {
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -25,7 +31,7 @@ export function ThemeProvider({ children }) {
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
 }
 
-export function useTheme() {
+export function useTheme(): ThemeValue {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error('useTheme must be used inside <ThemeProvider>');
   return ctx;

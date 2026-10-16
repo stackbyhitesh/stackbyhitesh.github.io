@@ -1,16 +1,23 @@
-import { Component } from 'react';
+import { Component, type ErrorInfo, type ReactNode } from 'react';
 import { profile } from '../data';
 
-/** Shows a friendly fallback instead of a blank page if something in the UI crashes. */
-export default class ErrorBoundary extends Component {
-  state = { failed: false };
+interface Props {
+  children: ReactNode;
+}
+interface State {
+  failed: boolean;
+}
 
-  static getDerivedStateFromError() {
+/** Shows a friendly fallback instead of a blank page if something in the UI crashes. */
+export default class ErrorBoundary extends Component<Props, State> {
+  state: State = { failed: false };
+
+  static getDerivedStateFromError(): State {
     return { failed: true };
   }
 
-  componentDidCatch(error) {
-    console.error('UI error:', error);
+  componentDidCatch(error: Error, info: ErrorInfo) {
+    console.error('UI error:', error, info.componentStack);
   }
 
   render() {

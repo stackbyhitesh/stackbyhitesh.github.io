@@ -9,12 +9,12 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const current = useScrollSpy(spyIds);
   const active = spyMap[current] || current;
-  const cls = (id) => (active === id ? 'on' : undefined);
+  const cls = (id: string) => (active === id ? 'on' : undefined);
 
   // Close the mobile menu with Escape, or when the window grows to desktop size.
   useEffect(() => {
     if (!open) return;
-    const onKey = (e) => { if (e.key === 'Escape') setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') setOpen(false); };
     const onResize = () => { if (window.innerWidth > 900) setOpen(false); };
     document.addEventListener('keydown', onKey);
     window.addEventListener('resize', onResize);

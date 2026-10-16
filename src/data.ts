@@ -1,6 +1,7 @@
 // All website content lives here. Edit this file to update the site.
+import type { Achievement, Job, Pair, Profile, Project, Service, SkillGroup, Stat, Testimonial } from './types';
 
-export const profile = {
+export const profile: Profile = {
   name: 'Hitesh Chaudhari',
   location: 'Bengaluru',
   hometown: 'Mumbai',
@@ -16,34 +17,34 @@ export const profile = {
 };
 
 // Contact card people can save to their phone (file is in /public).
-export const vcardUrl = `${import.meta.env.BASE_URL}hitesh-chaudhari.vcf`;
+export const vcardUrl: string = `${import.meta.env.BASE_URL}hitesh-chaudhari.vcf`;
 
-export const roles = [
+export const roles: string[] = [
   'Full-Stack Senior Software Engineer',
   'Tech Lead',
   'Forward Deployed Engineer',
   'AI-assisted developer',
 ];
 
-export const navLinks = [
+export const navLinks: Pair[] = [
   ['about', 'About'],
   ['work', 'Experience'],
   ['projects', 'Projects'],
   ['achievements', 'Achievements'],
   ['skills', 'Skills'],
 ];
-export const spyIds = ['about', 'work', 'process', 'projects', 'achievements', 'skills', 'edu', 'contact'];
-export const spyMap = { process: 'work', edu: 'skills' };
+export const spyIds: string[] = ['about', 'work', 'process', 'projects', 'achievements', 'skills', 'edu', 'contact'];
+export const spyMap: Record<string, string> = { process: 'work', edu: 'skills' };
 
-export const badges = [
+export const badges: Pair[] = [
   ['110M+', 'users reached'],
   ['−18%', 'API response time'],
   ['85%+', 'test coverage'],
 ];
 
-export const companies = ['OpenText', 'Bajaj Finserv', 'Chetu India', 'EasyNow', 'Fleet Solution'];
+export const companies: string[] = ['OpenText', 'Bajaj Finserv', 'Chetu India', 'EasyNow', 'Fleet Solution'];
 
-export const services = [
+export const services: Service[] = [
   { icon: '⚡', title: 'Performance engineering', text: 'Multi-layer caching, query tuning and smooth rendering of large datasets.', result: 'Up to 18% faster API responses' },
   { icon: '👥', title: 'Tech leadership', text: 'Architecture decisions, sprint planning, code reviews and mentoring.', result: '6 engineers led, 20+ releases' },
   { icon: '🤝', title: 'Forward deployed delivery', text: 'Turning enterprise customer needs into working integrations.', result: 'Stripe, Razorpay, Bajaj Pay, SSO' },
@@ -51,13 +52,13 @@ export const services = [
 ];
 
 // Experience counter is calculated automatically (see src/lib/experience.js).
-export const stats = [
+export const stats: Stat[] = [
   { n: 110, s: 'M+', label: 'users on modules I led' },
   { n: 20, s: '+', label: 'production releases' },
   { n: 35, s: 'K+', label: 'records rendered smoothly' },
 ];
 
-export const jobs = [
+export const jobs: Job[] = [
   {
     title: 'Senior Software Engineer, OpenText', period: 'Nov 2025 – Present', meta: 'Enterprise data platform', now: true,
     points: [
@@ -98,7 +99,7 @@ export const jobs = [
   },
 ];
 
-export const steps = [
+export const steps: Pair[] = [
   ['Understand', 'Translate customer and business requirements into a clear technical scope.'],
   ['Design', 'Plan scalable architecture and make the right trade-offs early.'],
   ['Build', 'Ship full-stack features with code reviews and 85%+ unit test coverage.'],
@@ -106,7 +107,7 @@ export const steps = [
   ['Support', 'Own CI/CD and production issues, and mentor the team.'],
 ];
 
-export const projects = [
+export const projects: Project[] = [
   { big: '−18%', title: 'Multi-layer caching', text: 'Frontend and Redis caching on a high-volume enterprise platform, cutting average API response time by up to 18%.', tags: ['Redis', 'Node.js', 'Performance'] },
   { big: '−25%', title: 'RAG code assistant', text: 'An internal assistant built with prompt engineering that cut boilerplate development time by 25%, plus a custom Copilot agent that follows team conventions.', tags: ['RAG', 'LLM', 'Copilot'] },
   { big: '35K+', title: 'Smooth large-data UI', text: 'Virtual scroll, lazy loading and debounced input removed a page-freezing issue when rendering 35K+ records.', tags: ['Frontend', 'MUI', 'Tailwind'] },
@@ -115,12 +116,12 @@ export const projects = [
   { big: 'Pay', title: 'Payments and SSO', text: 'Secure integrations of Bajaj Pay SDK, Stripe and Razorpay, with OAuth 2.0, JWT and SSO-based authentication.', tags: ['Stripe', 'Razorpay', 'SSO'] },
 ];
 
-export const marquee = [
+export const marquee: string[][] = [
   ['React', 'Angular', 'Next.js', 'TypeScript', 'Node.js', 'Java', 'PWA', 'Tailwind CSS', 'Material UI', 'GraphQL', 'Microservices'],
   ['Redis', 'PostgreSQL', 'MongoDB', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'RAG', 'LangChain', 'Copilot Agents', 'OAuth 2.0'],
 ];
 
-export const skillGroups = [
+export const skillGroups: SkillGroup[] = [
   { title: 'Frontend', tags: ['React', 'Angular', 'Next.js', 'TypeScript', 'RxJS', 'NgRx', 'Redux Toolkit', 'Module Federation'] },
   { title: 'Backend and APIs', tags: ['Node.js', 'Java', 'REST', 'GraphQL', 'Microservices'] },
   { title: 'AI-assisted development', tags: ['Copilot Agent mode', 'RAG', 'Vector DB', 'LangChain', 'LlamaIndex', 'OpenAI API', 'Anthropic API'] },
@@ -129,13 +130,13 @@ export const skillGroups = [
   { title: 'Quality and delivery', tags: ['Jasmine', 'Karma', 'JUnit', 'Cypress', 'TDD', 'SonarQube', 'CI/CD', 'Agile'] },
 ];
 
-export const education = [
+export const education: Pair[] = [
   ['MSc, Information Technology', 'University of Mumbai · 2019–2021'],
   ['BSc, Information Technology', 'Patkar College, University of Mumbai · 2015–2018'],
 ];
 
 // Image for each award: add a file named after the slug to src/assets/achievements (for example prodigy.jpg).
-export const achievements = [
+export const achievements: Achievement[] = [
   { slug: 'heros', title: "Hero's Award", note: 'Awarded for engineering excellence' },
   { slug: 'prodigy', title: 'Prodigy Award', note: 'Awarded for engineering excellence' },
   { slug: 'super-achiever', title: 'Super Achiever Award', note: 'Awarded for engineering excellence' },
@@ -143,11 +144,11 @@ export const achievements = [
 ];
 
 // Shown as small tags in the contact section.
-export const topics = ['Frontend performance', 'AI-assisted development', 'Engineering leadership'];
+export const topics: string[] = ['Frontend performance', 'AI-assisted development', 'Engineering leadership'];
 
 // Options in the "What's it about?" menu of the contact form.
-export const topicOptions = ['Just saying hello', 'A project idea', 'Collaboration', 'A question about my work', 'Something else'];
+export const topicOptions: string[] = ['Just saying hello', 'A project idea', 'Collaboration', 'A question about my work', 'Something else'];
 
 // Optional: add quotes (for example from LinkedIn recommendations, with permission) and a section appears.
 // Example: { quote: 'Hitesh made our dashboard fast again.', name: 'Name Surname', role: 'Role, Company' }
-export const testimonials = [];
+export const testimonials: Testimonial[] = [];

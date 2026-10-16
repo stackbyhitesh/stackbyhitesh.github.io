@@ -1,14 +1,21 @@
-import { useReducer } from 'react';
+import { useReducer, type ChangeEvent, type FormEvent } from 'react';
 import { profile, topicOptions, topics, vcardUrl } from '../data';
 import { useCopy } from '../hooks';
-import { LIMITS, buildMailto, validateContact } from '../lib/security';
+import { LIMITS, buildMailto, validateContact, type ContactErrors } from '../lib/security';
 import ExternalLink from './ExternalLink';
 import Reveal from './Reveal';
 
 // Form state lives in one reducer: field values, validation errors and status.
-const initialState = { values: { name: '', company: '', topic: topicOptions[0], message: '' }, errors: {}, status: 'idle' };
+type Values = { name: string; company: string; topic: string; message: string };
+type State = { values: Values; errors: ContactErrors; status: 'idle' | 'invalid' | 'sent' };
+type Action =
+  | { type: 'change'; field: keyof Values; value: string }
+  | { type: 'invalid'; errors: ContactErrors }
+  | { type: 'sent' };
 
-function reducer(state, action) {
+const initialState: State = { values: { name: '', company: '', topic: topicOptions[0], message: '' }, errors: {}, status: 'idle' };
+
+function reducer(state: State, action: Action): State {
   switch (action.type) {
     case 'change': {
       const values = { ...state.values, [action.field]: action.value };
@@ -28,10 +35,11 @@ function reducer(state, action) {
 export default function Contact() {
   const [copyLabel, copyEmail] = useCopy(profile.email);
   const [{ values, errors, status }, dispatch] = useReducer(reducer, initialState);
-  const change = (field) => (e) => dispatch({ type: 'change', field, value: e.target.value });
+  const change = (field: keyof Values) => (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+    dispatch({ type: 'change', field, value: e.target.value });
 
   // No server needed: this opens the visitor's email app with a pre-filled message.
-  const submit = (e) => {
+  const submit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const result = validateContact(values);
     if (Object.keys(result.errors).length) {
@@ -82,7 +90,7 @@ export default function Contact() {
           </label>
           <label>
             Your message
-            <textarea rows="4" value={values.message} onChange={change('message')} maxLength={LIMITS.message}
+            <textarea rows={4} value={values.message} onChange={change('message')} maxLength={LIMITS.message}
               aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? 'err-message' : undefined} />
             <span className="cnt">{values.message.length}/{LIMITS.message}</span>
             {errors.message && <span className="err" id="err-message" role="alert">{errors.message}</span>}

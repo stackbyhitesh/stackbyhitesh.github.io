@@ -3,6 +3,12 @@ import Reveal, { stagger } from './Reveal';
 import { achievements } from '../data';
 import { achievementImages } from '../lib/achievementImages';
 
+interface LightboxProps {
+  index: number;
+  onClose: () => void;
+  onNav: (step: number) => void;
+}
+
 // Only awards that have an image can be opened full size.
 const withImages = achievements
   .filter((a) => achievementImages[a.slug])
@@ -19,9 +25,10 @@ function Medal() {
 }
 
 /** Full-size view. Close with Escape, ✕ or a click outside; move between awards with the arrow keys or buttons. */
-function Lightbox({ index, onClose, onNav }) {
+function Lightbox({ index, onClose, onNav }: LightboxProps) {
   const item = withImages[index];
-  const closeRef = useRef(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const opener = document.activeElement;
@@ -30,22 +37,31 @@ function Lightbox({ index, onClose, onNav }) {
     closeRef.current?.focus();
     return () => {
       document.body.style.overflow = previousOverflow;
-      opener?.focus?.();
+      (opener as HTMLElement | null)?.focus?.();
     };
   }, []);
 
   useEffect(() => {
-    const onKey = (e) => {
+    const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
       else if (e.key === 'ArrowLeft') onNav(-1);
       else if (e.key === 'ArrowRight') onNav(1);
+      else if (e.key === 'Tab') {
+        // Keep keyboard focus inside the viewer while it is open.
+        const items = dialogRef.current ? dialogRef.current.querySelectorAll('button') : [];
+        if (items.length === 0) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
   }, [onClose, onNav]);
 
   return (
-    <div className="lb" role="dialog" aria-modal="true" aria-label={item.title} onClick={onClose}>
+    <div className="lb" ref={dialogRef} role="dialog" aria-modal="true" aria-label={item.title} onClick={onClose}>
       <figure onClick={(e) => e.stopPropagation()}>
         <img src={item.src} alt={item.title} />
         <figcaption>{item.title}<span>{index + 1} / {withImages.length}</span></figcaption>
@@ -62,9 +78,9 @@ function Lightbox({ index, onClose, onNav }) {
 }
 
 export default function Achievements() {
-  const [index, setIndex] = useState(null);
+  const [index, setIndex] = useState<number | null>(null);
   const close = useCallback(() => setIndex(null), []);
-  const nav = useCallback((step) => setIndex((i) => (i + step + withImages.length) % withImages.length), []);
+  const nav = useCallback((step: number) => setIndex((i) => ((i ?? 0) + step + withImages.length) % withImages.length), []);
 
   return (
     <section id="achievements">
@@ -81,7 +97,6 @@ export default function Achievements() {
               {at >= 0 ? (
                 <button type="button" className="ach-img" onClick={() => setIndex(at)} aria-label={`View ${a.title}`}>
                   <img src={withImages[at].src} alt={a.title} loading="lazy" decoding="async" />
-                  <span className="ach-tag">🏆 Award</span>
                 </button>
               ) : (
                 <div className="ach-ph"><Medal /></div>

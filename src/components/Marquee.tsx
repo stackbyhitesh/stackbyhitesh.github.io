@@ -1,5 +1,5 @@
 /** Endlessly scrolling row. Items are repeated twice so the loop is seamless. */
-export default function Marquee({ items }) {
+export default function Marquee({ items }: { items: readonly string[] }) {
   return (
     <div className="mq">
       <div className="mqi">

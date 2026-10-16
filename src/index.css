@@ -81,11 +81,12 @@ nav .btn.on{box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 55%,transparent)}
 /* =========================================================
    Hero
    ========================================================= */
-.hero{min-height:calc(100vh - 80px);min-height:min(780px,calc(100svh - 80px));display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(24px,4vw,48px);align-items:center;padding-block:clamp(32px,6vw,64px)}
+.hero{min-height:calc(100vh - 80px);min-height:min(780px,calc(100svh - 80px));display:grid;grid-template-columns:1.3fr .7fr;gap:clamp(24px,4vw,48px);align-items:center;padding-block:clamp(32px,6vw,64px)}
 .chip{display:inline-flex;gap:10px;align-items:center;padding:7px 16px;border:1px solid var(--line);border-radius:99px;background:var(--card);font:500 .78rem var(--font-mono);color:var(--muted);margin-bottom:clamp(18px,3vw,26px)}
 .chips{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:clamp(18px,3vw,26px)}
 .chips .chip{margin-bottom:0}
-.hero h1{font-size:clamp(2.1rem,1.2rem + 4.6vw,5.2rem);font-weight:800;line-height:1.04;letter-spacing:-.035em}
+.hero h1 .line{display:block}
+.hero h1{font-size:clamp(2.2rem,1rem + 4.2vw,4.5rem);font-weight:800;line-height:1.04;letter-spacing:-.035em}
 .grad{background:linear-gradient(100deg,var(--a),var(--b),var(--a));-webkit-background-clip:text;background-clip:text;color:transparent;background-size:200% auto;animation:sh 6s linear infinite}
 @keyframes sh{to{background-position:200% center}}
 .type{margin:22px 0 0;font:500 clamp(.95rem,.6rem + 1.1vw,1.3rem) var(--font-mono);color:var(--ink);min-height:1.7em}
@@ -171,7 +172,7 @@ nav .btn.on{box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 55%,transparent)}
 /* =========================================================
    Projects, skills, education
    ========================================================= */
-.g4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:20px}
+.g4{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .pj{display:flex;flex-direction:column;gap:12px}
 .pj .big{font:800 clamp(1.8rem,1.4rem + 1.2vw,2.3rem)/1 var(--font-display);letter-spacing:-.03em;background:linear-gradient(120deg,var(--a),var(--b));-webkit-background-clip:text;background-clip:text;color:transparent}
 .sk{margin-top:36px}
@@ -183,13 +184,11 @@ nav .btn.on{box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 55%,transparent)}
 /* =========================================================
    Achievements + lightbox
    ========================================================= */
-.ach-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:20px}
+.ach-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .ach{padding:0;display:flex;flex-direction:column}
 .ach-img{position:relative;display:block;width:100%;aspect-ratio:4/3;margin:0;padding:0;border:0;background:var(--bg2);cursor:zoom-in;overflow:hidden}
 .ach-img img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .5s}
-.ach-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(5,11,26,.5))}
 .ach-img::before{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;z-index:2;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-18deg);transition:left .9s ease;pointer-events:none}
-.ach-tag{position:absolute;left:12px;bottom:12px;z-index:3;padding:4px 12px;border-radius:99px;font:500 .75rem var(--font-mono);color:#fff;background:rgba(5,11,26,.6);backdrop-filter:blur(6px)}
 .ach-ph{display:grid;place-items:center;width:100%;aspect-ratio:4/3;color:var(--b);background:linear-gradient(135deg,color-mix(in srgb,var(--a) 35%,transparent),color-mix(in srgb,var(--b) 16%,transparent)),var(--bg2)}
 .ach-ph svg{width:76px;height:76px}
 .ach-body{padding:20px 22px 24px}
@@ -230,7 +229,7 @@ form .btn{width:100%}
 .ok a{color:var(--b)}
 footer{padding:20px 0 calc(60px + env(safe-area-inset-bottom,0px));text-align:center;color:var(--muted);font-size:.85rem}
 .cta2{text-align:center;padding-block:clamp(56px,9vw,90px) 30px}
-.cta2 h2{max-width:none;margin:0 auto 26px;font-size:clamp(2rem,1rem + 4.4vw,4.5rem)}
+.cta2 h2{color:var(--ink);max-width:none;margin:0 auto 26px;font-size:clamp(2rem,1rem + 4.4vw,4.5rem)}
 .cta2 a.m{display:inline-block;font:700 clamp(1rem,.7rem + 1.4vw,1.75rem) var(--font-display);text-decoration:none;border-bottom:2px solid var(--b);padding-bottom:4px;overflow-wrap:anywhere}
 .cta2 .up{display:block;margin:34px auto 0;color:var(--muted);font-size:.85rem;text-decoration:none}
 
@@ -289,6 +288,38 @@ footer{padding:20px 0 calc(60px + env(safe-area-inset-bottom,0px));text-align:ce
 @media (max-height:520px) and (orientation:landscape){.hero{min-height:0}}
 @media (pointer:coarse){.tg,.soc a{min-width:44px;min-height:44px}}
 
+
+/* ---------- Glass accents ----------
+   Frosted, translucent surfaces on smaller elements (chips, buttons, icon tiles, floating badges,
+   service and project cards, contact links, menus). Big panels stay solid to keep scrolling smooth. */
+:root{--glass:rgba(255,255,255,.55);--glass-2:rgba(255,255,255,.85);--glass-line:rgba(255,255,255,.95);--glass-hi:#fff;--glass-blur:blur(16px) saturate(1.5)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--glass:rgba(255,255,255,.055);--glass-2:rgba(255,255,255,.11);--glass-line:rgba(255,255,255,.15);--glass-hi:rgba(255,255,255,.24)}}
+:root[data-theme="dark"]{--glass:rgba(255,255,255,.055);--glass-2:rgba(255,255,255,.11);--glass-line:rgba(255,255,255,.15);--glass-hi:rgba(255,255,255,.24)}
+
+.chip,.hl span,.soc a,.tg,.mp,.lb-nav,.fl,.lk a,.lk button,.ic{
+  background:var(--glass);-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 var(--glass-hi)}
+.fl{background:linear-gradient(145deg,var(--glass-2),var(--glass));box-shadow:inset 0 1px 0 var(--glass-hi),0 24px 44px -24px rgba(0,0,0,.55)}
+.ab .gl,.pj{
+  background:linear-gradient(145deg,var(--glass-2),var(--glass));-webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-line);box-shadow:inset 0 1px 0 var(--glass-hi),0 22px 44px -30px rgba(0,0,0,.6)}
+.ic{background:linear-gradient(135deg,color-mix(in srgb,var(--a) 88%,transparent),color-mix(in srgb,var(--b) 78%,transparent))}
+.lk a,.lk button{background:linear-gradient(145deg,var(--glass-2),var(--glass))}
+
+/* Soft colour glows behind the glass cards so the frosted effect is visible */
+#about::after,#projects::after,#achievements::after{content:"";position:absolute;z-index:-1;pointer-events:none;width:min(520px,70vw);aspect-ratio:1;border-radius:50%;filter:blur(36px)}
+#about::after{right:-6%;top:18%;background:radial-gradient(circle,color-mix(in srgb,var(--a) 34%,transparent),transparent 65%)}
+#projects::after{left:-8%;top:26%;background:radial-gradient(circle,color-mix(in srgb,var(--b) 28%,transparent),transparent 65%)}
+#achievements::after{right:-4%;top:8%;background:radial-gradient(circle,color-mix(in srgb,var(--c) 24%,transparent),transparent 65%)}
+
+@media (max-width:900px){#about::after{right:0}#projects::after{left:0}#achievements::after{right:0}}
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  :root{--glass:rgba(240,244,255,.92);--glass-2:rgba(255,255,255,.96)}
+  :root[data-theme="dark"]{--glass:rgba(24,32,58,.92);--glass-2:rgba(32,42,74,.95)}
+}
+
+@media (max-width:1024px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.ach-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:700px){.g4{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
 
 /* Print: clean, ink-friendly version of the page */

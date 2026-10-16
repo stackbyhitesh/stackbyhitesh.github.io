@@ -12,8 +12,8 @@ const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8 };
 export default function Hero() {
   const typed = useTyping(roles);
   const experience = getExperience();
-  const areaRef = useRef(null);
-  const ringRef = useRef(null);
+  const areaRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   useTilt(areaRef, ringRef);
 
   return (
@@ -24,7 +24,7 @@ export default function Hero() {
           <span className="chip">🏠 Hometown: {profile.hometown}</span>
         </div>
         <h1>
-          Hi, I'm Hitesh. I build <span className="grad">fast, scalable products</span> for millions.
+          <span className="line">Hi, I'm Hitesh.</span> I build <span className="grad">fast, scalable products</span> for millions.
         </h1>
         <p className="type" aria-live="off">{typed}</p>
         <p className="lead">
