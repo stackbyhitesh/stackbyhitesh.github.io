@@ -1,4 +1,5 @@
 import { achievements } from '../data';
+import { assignImages, type ImageFile } from './awardMatch';
 
 // Finds every image in src/assets/achievements. Upper- and lower-case extensions both work.
 const files = import.meta.glob<string>(
@@ -6,23 +7,27 @@ const files = import.meta.glob<string>(
   { eager: true, import: 'default' }
 );
 
-/** "Super Achiever.PNG" -> "superachiever", "Hero's.jpg" -> "heros", "tech_titan.webp" -> "techtitan" */
-export const normalizeKey = (name: string): string =>
-  name.toLowerCase().replace(/\.[^.]+$/, '').replace(/[^a-z0-9]/g, '');
+const imageFiles: ImageFile[] = Object.entries(files).map(([path, url]) => ({
+  name: path.split('/').pop() ?? path,
+  url,
+}));
 
-const byKey: Record<string, string> = Object.fromEntries(
-  Object.entries(files).map(([path, url]) => [normalizeKey(path.split('/').pop() ?? path), url])
-);
+/** Award slug -> image URL (only for awards that have an image). */
+export const achievementImages: Record<string, string> = assignImages(achievements, imageFiles);
 
-/** Image URL for an award `slug` (spaces, dashes, underscores and capital letters are ignored), or undefined. */
-export const findAchievementImage = (slug: string): string | undefined => byKey[normalizeKey(slug)];
+/** Image URL for an award `slug`, or undefined. */
+export const findAchievementImage = (slug: string): string | undefined => achievementImages[slug];
 
-// While developing, say which award images were found and which are missing.
+// While developing, say which images were found and which awards or files are left over.
 if (import.meta.env.DEV) {
-  const found = achievements.filter((a) => findAchievementImage(a.slug)).map((a) => a.slug);
-  const missing = achievements.filter((a) => !findAchievementImage(a.slug)).map((a) => a.slug);
+  const missing = achievements.filter((a) => !achievementImages[a.slug]).map((a) => a.slug);
+  const usedUrls = new Set(Object.values(achievementImages));
+  const unmatched = imageFiles.filter((f) => !usedUrls.has(f.url)).map((f) => f.name);
   console.info(
-    `[achievements] images found: ${found.join(', ') || 'none'}. Missing: ${missing.join(', ') || 'none'}. ` +
-      `Put them in src/assets/achievements/ (for example prodigy.jpg).`
+    `[achievements] ${imageFiles.length} image file(s) in src/assets/achievements. ` +
+      `Matched awards: ${Object.keys(achievementImages).join(', ') || 'none'}. ` +
+      `Awards without image: ${missing.join(', ') || 'none'}. ` +
+      `Files not matched to any award: ${unmatched.join(', ') || 'none'}. ` +
+      `Rename a file after its award (prodigy.jpg), or set \`file: 'name.jpg'\` on the award in src/data.ts.`
   );
 }

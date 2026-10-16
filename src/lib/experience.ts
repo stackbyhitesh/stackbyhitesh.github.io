@@ -63,3 +63,25 @@ export function getExperience(now: Date = new Date(), start: CareerStart = CAREE
       : { prefix: '', to: years, suffix: months > 0 ? '+' : '' },
   };
 }
+
+/** "2025-11" -> a number of months, so dates can be subtracted. */
+export const monthIndex = (ym: string): number => {
+  const [y, m] = ym.split('-').map(Number);
+  return y * 12 + (m - 1);
+};
+
+/** Whole months from `start` to `end` ("YYYY-MM"), or to today when `end` is left out. */
+export function monthsBetween(start: string, end?: string, now: Date = new Date()): number {
+  const endIdx = end ? monthIndex(end) : now.getFullYear() * 12 + now.getMonth();
+  return Math.max(0, endIdx - monthIndex(start));
+}
+
+/** 32 -> "2 yrs 8 mo", 11 -> "11 mo", 24 -> "2 yrs" */
+export function formatDuration(months: number): string {
+  const y = Math.floor(months / 12);
+  const m = months % 12;
+  const parts: string[] = [];
+  if (y) parts.push(`${y} yr${y > 1 ? 's' : ''}`);
+  if (m || !y) parts.push(`${m} mo`);
+  return parts.join(' ');
+}

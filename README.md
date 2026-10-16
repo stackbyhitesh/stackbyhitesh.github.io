@@ -48,6 +48,15 @@ npm run preview     # serve the built site locally
 - Your photo is `src/assets/hitesh.jpg`.
 - Link preview image (shown when the link is shared): `public/og-image.png` (1200×630).
 
+## Experience section ("Where I've made an impact")
+Each job in `src/data.ts` has these fields (typed in `src/types.ts`):
+- `summary`: one plain-language sentence that explains the role to anyone.
+- `results`: the headline numbers shown as small tiles (for example `{ value: '−18%', label: 'API response time' }`).
+- `points`: the details, shown when "What I did" is opened. Explain technical terms in plain words and put the tool name in brackets.
+- `tags`: the technologies, shown under "Tech used".
+- `start` / `end` (`"YYYY-MM"`; leave `end` out for the current job): these draw the "Career at a glance" chart and calculate each duration automatically.
+- `period`: the dates as written on the card.
+
 ## Award images
 Put images in `src/assets/achievements/`, named after the `slug` of each award in `data.ts`:
 `heros.jpg`, `prodigy.jpg`, `super-achiever.jpg`, `tech-titan.jpg` (png, webp and avif also work).
@@ -56,10 +65,13 @@ Cards without an image show a medal placeholder. Clicking a card with an image o
 
 **Images not showing?** The "Click an award to view it full size" line only appears when at least one image is found.
 1. The image must be inside `src/assets/achievements/` (not `sample-images/` and not `public/`).
-2. The file name must match the award: `heros`, `prodigy`, `super-achiever`, `tech-titan`. Capital letters, spaces, dashes and underscores are ignored, so `Super Achiever.PNG` also works. Supported types: jpg, jpeg, png, webp, avif, gif.
-3. Make sure the files are committed and pushed: `git add src/assets/achievements` then commit and push.
-4. While running `npm run dev`, the browser console shows which award images were found and which are missing.
-5. Quick test: copy the four files from `sample-images/` into `src/assets/achievements/`.
+2. Name it after the award: `heros`, `prodigy`, `super-achiever`, `tech-titan`. Capital letters, spaces, dashes and underscores are ignored, so `Super Achiever.PNG` works, and close names such as `Hero.png`, `titan.jpg` or `Prodigy copy.jpg` are matched too. Supported types: jpg, jpeg, png, webp, avif, gif.
+3. **Any file name:** if a file has an unrelated name (for example `IMG_1234.jpg`), set it on the award in `src/data.ts`:
+   `{ slug: 'prodigy', title: 'Prodigy Award', note: '…', file: 'IMG_1234.jpg' }`
+4. Commit and push the images: `git add src/assets/achievements`, commit, push. Files that exist only on your computer do not appear on the live site.
+5. **Check the deploy:** on GitHub open the **Actions** tab. If the latest run is red, the live site was not updated, so new images (and any other changes) are not live yet.
+6. While running `npm run dev`, the browser console lists how many image files were found, which awards matched, and which files were left over.
+7. Quick test: copy the four files from `sample-images/` into `src/assets/achievements/`.
 
 ## Experience counter
 Years and months of experience are calculated from today's date (hero text, "What I do" text and the stats strip). The start date is `CAREER_START` in `src/lib/experience.ts` (September 2018).
