@@ -1,9 +1,11 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import tailwindcss from '@tailwindcss/vite';
 
 // Content-Security-Policy for the production build.
 // GitHub Pages cannot send HTTP headers, so the policy is added as a <meta> tag.
 // Everything (scripts, styles, fonts, images) is served from the site itself, so the policy is strict.
+// The only outside address the page may talk to is the contact-form mail service (Web3Forms).
 // It is only added for `vite build` because the dev server needs inline scripts for hot reload.
 const CSP = [
   "default-src 'self'",
@@ -11,7 +13,7 @@ const CSP = [
   "style-src 'self'",
   "img-src 'self' data:",
   "font-src 'self'",
-  "connect-src 'self'",
+  "connect-src 'self' https://api.web3forms.com",
   "object-src 'none'",
   "base-uri 'self'",
   "form-action 'none'",
@@ -25,8 +27,8 @@ const injectCsp = (): Plugin => ({
 });
 
 // Public site address, used for the link-preview image, canonical link and sitemap.
-// Set the SITE_URL environment variable when building (the GitHub workflow does this for you).
-const rawSite = (process.env.SITE_URL ?? '').trim();
+// Defaults to the live site; set the SITE_URL environment variable to build for another address.
+const rawSite = (process.env.SITE_URL ?? 'https://stackbyhitesh.github.io/').trim();
 const SITE = rawSite ? rawSite.replace(/\/*$/, '/') : '';
 
 const seo = (): Plugin => ({
@@ -60,8 +62,8 @@ const seo = (): Plugin => ({
   },
 });
 
-// base './' makes the built site work under any GitHub Pages URL (user.github.io/repo-name/)
+// base './' keeps the built site working from any path (user site at the root, or a project site under /repo-name/)
 export default defineConfig({
-  plugins: [react(), injectCsp(), seo()],
+  plugins: [react(), tailwindcss(), injectCsp(), seo()],
   base: './',
 });

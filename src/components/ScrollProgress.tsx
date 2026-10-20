@@ -15,5 +15,5 @@ export default function ScrollProgress() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  return <div id="pg" ref={ref} />;
+  return <div className="fixed inset-x-0 top-0 z-40 h-[3px] origin-left scale-x-0 bg-linear-to-r from-accent to-accent2 print:hidden" ref={ref} />;
 }

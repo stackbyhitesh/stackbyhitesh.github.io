@@ -27,5 +27,9 @@ export default function Counter({ to, prefix = '', suffix = '' }: CounterProps) 
     return () => cancelAnimationFrame(raf);
   }, [inView, reduced, to]);
 
-  return <b ref={ref}>{prefix}{value}{suffix}</b>;
+  return (
+    <b ref={ref} className="text-grad mb-2 block font-display text-[clamp(2rem,1rem+3vw,3.25rem)] leading-none font-extrabold tracking-[-.03em]">
+      {prefix}{value}{suffix}
+    </b>
+  );
 }

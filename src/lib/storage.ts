@@ -6,4 +6,7 @@ export const safeStorage = {
   set(key: string, value: string): void {
     try { window.localStorage.setItem(key, value); } catch { /* storage unavailable: ignore */ }
   },
+  remove(key: string): void {
+    try { window.localStorage.removeItem(key); } catch { /* storage unavailable: ignore */ }
+  },
 };

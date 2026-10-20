@@ -16,6 +16,17 @@ export const profile: Profile = {
   calendar: '',  // e.g. 'https://cal.com/your-name/15min' adds a "Book a 15-min call" link
 };
 
+// ---------------------------------------------------------------------------------------------
+// Contact form email (free). Messages are delivered straight to your inbox through Web3Forms,
+// so visitors never need to open a mail app.
+//   1. Go to https://web3forms.com, type chaudharihitesh57@gmail.com and press "Create Access Key".
+//   2. They email you a key that looks like 1a2b3c4d-1234-5678-9abc-def012345678 (it is safe to publish).
+//   3. Paste it between the quotes below, commit and push. (Or set a GitHub repository variable
+//      named WEB3FORMS_KEY; the deploy workflow passes it in as VITE_WEB3FORMS_KEY.)
+// Until a valid key is set, the form falls back to opening the visitor's mail app.
+// ---------------------------------------------------------------------------------------------
+export const WEB3FORMS_KEY: string = (import.meta.env.VITE_WEB3FORMS_KEY as string | undefined) || '';
+
 // Contact card people can save to their phone (file is in /public).
 export const vcardUrl: string = `${import.meta.env.BASE_URL}hitesh-chaudhari.vcf`;
 
@@ -32,6 +43,17 @@ export const navLinks: Pair[] = [
   ['projects', 'Projects'],
   ['achievements', 'Achievements'],
   ['skills', 'Skills'],
+];
+// Every section, in page order. Used by the command menu (Ctrl/⌘ + K).
+export const sections: Pair[] = [
+  ['about', 'About'],
+  ['work', 'Experience'],
+  ['process', 'How I work'],
+  ['projects', 'Projects'],
+  ['achievements', 'Achievements'],
+  ['skills', 'Skills'],
+  ['edu', 'Education'],
+  ['contact', 'Contact'],
 ];
 export const spyIds: string[] = ['about', 'work', 'process', 'projects', 'achievements', 'skills', 'edu', 'contact'];
 export const spyMap: Record<string, string> = { process: 'work', edu: 'skills' };
@@ -152,12 +174,12 @@ export const steps: Pair[] = [
 ];
 
 export const projects: Project[] = [
-  { big: '−18%', title: 'Multi-layer caching', text: 'Frontend and Redis caching on a high-volume enterprise platform, cutting average API response time by up to 18%.', tags: ['Redis', 'Node.js', 'Performance'] },
-  { big: '−25%', title: 'RAG code assistant', text: 'An internal assistant built with prompt engineering that cut boilerplate development time by 25%, plus a custom Copilot agent that follows team conventions.', tags: ['RAG', 'LLM', 'Copilot'] },
-  { big: '35K+', title: 'Smooth large-data UI', text: 'Virtual scroll, lazy loading and debounced input removed a page-freezing issue when rendering 35K+ records.', tags: ['Frontend', 'MUI', 'Tailwind'] },
-  { big: 'CRM', title: 'Engineering CRM', text: 'Built from scratch on Node.js with a frontend UI: sprint tracking, workflow automation and reporting. Adopted by the whole team.', tags: ['Node.js', 'Automation', 'Reporting'] },
-  { big: 'Offline', title: 'Offline-first mobile app', text: 'Cross-platform Ionic app with a Node.js backend, local persistence and background sync for unreliable networks.', tags: ['Ionic', 'iOS / Android', 'Sync'] },
-  { big: 'Pay', title: 'Payments and SSO', text: 'Secure integrations of Bajaj Pay SDK, Stripe and Razorpay, with OAuth 2.0, JWT and SSO-based authentication.', tags: ['Stripe', 'Razorpay', 'SSO'] },
+  { big: '−18%', title: 'Multi-layer caching', text: 'Frontend and Redis caching on a high-volume enterprise platform, cutting average API response time by up to 18%.', tags: ['Redis', 'Node.js', 'Performance'], categories: ['Performance', 'Backend'] },
+  { big: '−25%', title: 'RAG code assistant', text: 'An internal assistant built with prompt engineering that cut boilerplate development time by 25%, plus a custom Copilot agent that follows team conventions.', tags: ['RAG', 'LLM', 'Copilot'], categories: ['AI'] },
+  { big: '35K+', title: 'Smooth large-data UI', text: 'Virtual scroll, lazy loading and debounced input removed a page-freezing issue when rendering 35K+ records.', tags: ['Frontend', 'MUI', 'Tailwind'], categories: ['Performance', 'Frontend'] },
+  { big: 'CRM', title: 'Engineering CRM', text: 'Built from scratch on Node.js with a frontend UI: sprint tracking, workflow automation and reporting. Adopted by the whole team.', tags: ['Node.js', 'Automation', 'Reporting'], categories: ['Frontend', 'Backend'] },
+  { big: 'Offline', title: 'Offline-first mobile app', text: 'Cross-platform Ionic app with a Node.js backend, local persistence and background sync for unreliable networks.', tags: ['Ionic', 'iOS / Android', 'Sync'], categories: ['Mobile', 'Backend'] },
+  { big: 'Pay', title: 'Payments and SSO', text: 'Secure integrations of Bajaj Pay SDK, Stripe and Razorpay, with OAuth 2.0, JWT and SSO-based authentication.', tags: ['Stripe', 'Razorpay', 'SSO'], categories: ['Backend', 'Payments'] },
 ];
 
 export const marquee: string[][] = [

@@ -64,6 +64,8 @@ export interface Project {
   title: string;
   text: string;
   tags: string[];
+  /** Used by the filter buttons in the Projects section. A project can be in several categories. */
+  categories: string[];
 }
 
 export interface SkillGroup {

@@ -1,20 +1,21 @@
 import Reveal, { stagger } from './Reveal';
+import Section from './Section';
 import { education } from '../data';
 
 export default function Education() {
   return (
-    <section id="edu" style={{ paddingTop: 20 }}>
+    <Section id="edu" divider={false} className="pt-5">
       <Reveal>
         <div className="kick">Education</div>
       </Reveal>
-      <div className="aw">
+      <div className="grid gap-5 sm:grid-cols-2">
         {education.map(([degree, school], i) => (
-          <Reveal className="gl" delay={stagger(i)} key={degree}>
+          <Reveal className="card" delay={stagger(i)} key={degree}>
             <h3>{degree}</h3>
-            <p>{school}</p>
+            <p className="text-muted">{school}</p>
           </Reveal>
         ))}
       </div>
-    </section>
+    </Section>
   );
 }

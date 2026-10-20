@@ -11,6 +11,7 @@ import '@fontsource/jetbrains-mono/latin-500.css';
 import App from './App';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ThemeProvider, getInitialTheme } from './context/ThemeContext';
+import { ToastProvider } from './context/ToastContext';
 import './index.css';
 
 // Apply the saved theme before the first render to avoid a flash.
@@ -23,7 +24,9 @@ createRoot(container).render(
   <StrictMode>
     <ErrorBoundary>
       <ThemeProvider>
-        <App />
+        <ToastProvider>
+          <App />
+        </ToastProvider>
       </ThemeProvider>
     </ErrorBoundary>
   </StrictMode>

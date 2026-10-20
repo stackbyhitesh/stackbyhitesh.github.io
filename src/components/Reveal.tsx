@@ -1,10 +1,10 @@
-import type { ElementType, HTMLAttributes, PointerEvent, ReactNode } from 'react';
+import type { CSSProperties, ElementType, HTMLAttributes, PointerEvent, ReactNode } from 'react';
 import { useInView, usePrefersReducedMotion } from '../hooks';
 
-const HAS_GLOW = /(^|\s)gl(\s|$)/;
+const IS_CARD = /(^|\s)card(\s|$)/;
 export const stagger = (index: number): number => (index % 4) * 80;
 
-// Cards (class "gl") get a soft light that follows the pointer.
+// Cards get a soft light that follows the pointer.
 function moveGlow(e: PointerEvent<HTMLElement>) {
   const el = e.currentTarget;
   const r = el.getBoundingClientRect();
@@ -21,16 +21,16 @@ type RevealProps = HTMLAttributes<HTMLElement> & {
 };
 
 /** Wraps any element and fades it in once it scrolls into view. */
-export default function Reveal({ as: Tag = 'div', className = '', delay = 0, children, ...rest }: RevealProps) {
+export default function Reveal({ as: Tag = 'div', className = '', delay = 0, children, style, ...rest }: RevealProps) {
   const reduced = usePrefersReducedMotion();
   const [ref, inView] = useInView<HTMLElement>();
   const shown = reduced || inView;
   return (
     <Tag
       ref={ref}
-      className={`${className} rv${shown ? ' in' : ''}`.trim()}
-      style={delay ? { transitionDelay: `${delay}ms` } : undefined}
-      onPointerMove={HAS_GLOW.test(className) ? moveGlow : undefined}
+      className={`reveal${shown ? ' in' : ''} ${className}`.trim()}
+      style={delay ? ({ ...style, '--d': `${delay}ms` } as CSSProperties) : style}
+      onPointerMove={IS_CARD.test(className) ? moveGlow : undefined}
       {...rest}
     >
       {children}

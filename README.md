@@ -7,8 +7,26 @@ A fast, accessible, single-page portfolio built with **React 18**, **TypeScript*
 - **TypeScript** in strict mode (`npm run typecheck`)
 - **Vite 6** for the dev server and production build
 - **Vitest** for unit tests, **ESLint** (typescript-eslint, React, React Hooks) for code quality
-- Plain CSS in `src/index.css` (dark design with glass accents, plus a light theme)
-- Fonts bundled with `@fontsource` (Plus Jakarta Sans, Inter, JetBrains Mono), so nothing loads from third parties
+- **Tailwind CSS v4** (`@tailwindcss/vite`): styling is utility classes in the components. `src/index.css` only holds the design tokens (dark and light), animations and a few reusable classes (`card`, `btn`, `glass`)
+- Fonts bundled with `@fontsource` (Plus Jakarta Sans, Inter, JetBrains Mono), so nothing loads from third parties (the only outside call is the contact form to Web3Forms)
+
+## Live address
+The site is published at **https://stackbyhitesh.github.io/**. That address is the default for the canonical link, link-preview image, sitemap and robots.txt (`vite.config.ts` and the deploy workflow). For a different address, set a repository variable named `SITE_URL`.
+
+## Contact form (free email, no mail app needed)
+Messages go straight to your inbox through [Web3Forms](https://web3forms.com) (free, no server).
+1. Open web3forms.com, enter `chaudharihitesh57@gmail.com` and press **Create Access Key**. The key arrives by email.
+2. Paste it into `WEB3FORMS_KEY` in `src/data.ts` (it is safe to publish), **or** add a repository variable `WEB3FORMS_KEY` under Settings → Secrets and variables → Actions → Variables.
+3. Commit and push. Done.
+
+Until a valid key is set the form falls back to opening the visitor's mail app. Extras: the visitor's email is the Reply-To, a hidden spam trap, a 60-second cooldown, drafts saved in the browser, and a clear error with an "email me directly" link if sending fails.
+
+## New in v2
+- Tailwind CSS rewrite of every component (same design, dark and light themes)
+- Working contact form (above) with email field, loading, success and error states
+- Quick menu: press **Ctrl/⌘ + K** or **/** to jump to a section, switch theme, copy email, save contact or save the page as PDF
+- Project filter buttons (categories are set per project in `src/data.ts`)
+- Back-to-top button with a scroll-progress ring, "Share this site" in the footer, "Save this page as PDF"
 
 ## Commands
 ```bash
@@ -105,7 +123,7 @@ git ls-files 'src/*.js' 'src/*.jsx' | xargs git rm -f
    ```
 3. On GitHub open **Settings → Pages** and set **Source** to **GitHub Actions**.
 4. Open the **Actions** tab and wait for the workflow to turn green (about 1–2 minutes).
-5. Your site is live at `https://YOUR-USERNAME.github.io/portfolio/`.
+5. Your site is live at `https://stackbyhitesh.github.io/`.
 
 Every push to `main` runs typecheck, lint, tests, an audit and the build, then deploys. Pull requests run the same checks without deploying.
 

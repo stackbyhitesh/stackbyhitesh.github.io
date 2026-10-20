@@ -23,10 +23,10 @@ export default class ErrorBoundary extends Component<Props, State> {
   render() {
     if (!this.state.failed) return this.props.children;
     return (
-      <main style={{ maxWidth: 560, margin: '20vh auto', padding: 24, fontFamily: 'system-ui, sans-serif', textAlign: 'center' }}>
-        <h1>Something went wrong</h1>
-        <p>Please reload the page. You can also reach Hitesh at <a href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
-        <button onClick={() => window.location.reload()}>Reload</button>
+      <main className="mx-auto my-[20vh] max-w-[560px] p-6 text-center">
+        <h1 className="mb-3 text-3xl font-extrabold">Something went wrong</h1>
+        <p className="mb-5 text-muted">Please reload the page. You can also reach Hitesh at <a className="underline" href={`mailto:${profile.email}`}>{profile.email}</a>.</p>
+        <button className="btn btn-primary" onClick={() => window.location.reload()}>Reload</button>
       </main>
     );
   }

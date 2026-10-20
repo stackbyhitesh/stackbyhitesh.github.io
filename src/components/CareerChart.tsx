@@ -19,13 +19,13 @@ export default function CareerChart() {
     .join('. ');
 
   return (
-    <Reveal className="career" role="img" aria-label={`Career path. ${summary}.`}>
-      <p className="career-title" aria-hidden="true">Career at a glance</p>
-      <div className="career-grid" aria-hidden="true">
-        <div className="c-axis">
-          {showFirstYear && <span className="c-tick first" style={{ left: 0 }}>{firstYear}</span>}
+    <Reveal className="print-box mb-[clamp(28px,4vw,40px)] rounded-3xl border border-line bg-card px-[clamp(16px,2.6vw,28px)] pt-5 pb-[22px]" role="img" aria-label={`Career path. ${summary}.`}>
+      <p className="mb-3.5 font-mono text-[.74rem] font-medium tracking-[.12em] text-muted uppercase" aria-hidden="true">Career at a glance</p>
+      <div className="grid gap-2" aria-hidden="true">
+        <div className="relative h-[18px] sm:ml-[162px]">
+          {showFirstYear && <span className="absolute top-0 left-0 font-mono text-[.7rem] font-medium text-muted">{firstYear}</span>}
           {years.map((y) => (
-            <span className="c-tick" key={y} style={{ left: `${pct(y * 12)}%` }}>{y}</span>
+            <span className="absolute top-0 -translate-x-1/2 font-mono text-[.7rem] font-medium text-muted" key={y} style={{ left: `${pct(y * 12)}%` }}>{y}</span>
           ))}
         </div>
         {jobs.map((j) => {
@@ -36,12 +36,16 @@ export default function CareerChart() {
           // Bars that end near the right edge get their label on the left, so it is not cut off.
           const labelStyle = left + width > 86 ? { right: `calc(${100 - left}% + 8px)` } : { left: `calc(${left + width}% + 8px)` };
           return (
-            <div className="c-row" key={j.company}>
-              <span className="c-name">{j.company}</span>
-              <span className="c-track">
-                {years.map((y) => <i className="c-line" key={y} style={{ left: `${pct(y * 12)}%` }} />)}
-                <span className={`c-bar${j.now ? ' now' : ''}`} style={{ left: `${left}%`, width: `${width}%` }} title={`${j.company}: ${j.period}`} />
-                <span className="c-dur" style={labelStyle}>{label}</span>
+            <div className="grid items-center gap-1 sm:grid-cols-[150px_1fr] sm:gap-3" key={j.company}>
+              <span className="text-[.85rem] leading-tight font-semibold sm:text-[.9rem]">{j.company}</span>
+              <span className="relative h-4">
+                {years.map((y) => <i className="absolute -top-1 -bottom-1 w-px bg-line" key={y} style={{ left: `${pct(y * 12)}%` }} />)}
+                <span
+                  className={`absolute inset-y-0.5 min-w-1.5 rounded-full ${j.now ? 'bg-[linear-gradient(90deg,#ff9a3c,var(--c))]' : 'bg-[linear-gradient(90deg,var(--a),var(--b))]'}`}
+                  style={{ left: `${left}%`, width: `${width}%` }}
+                  title={`${j.company}: ${j.period}`}
+                />
+                <span className="absolute top-0 font-mono text-[.72rem] leading-4 whitespace-nowrap text-muted" style={labelStyle}>{label}</span>
               </span>
             </div>
           );
