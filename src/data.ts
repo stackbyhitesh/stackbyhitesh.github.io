@@ -16,19 +16,9 @@ export const profile: Profile = {
   calendar: '',  // e.g. 'https://cal.com/your-name/15min' adds a "Book a 15-min call" link
 };
 
-// ---------------------------------------------------------------------------------------------
-// Contact form email (free). Messages are delivered straight to your inbox through Web3Forms,
-// so visitors never need to open a mail app.
-//   1. Go to https://web3forms.com, type chaudharihitesh57@gmail.com and press "Create Access Key".
-//   2. They email you a key that looks like 1a2b3c4d-1234-5678-9abc-def012345678 (it is safe to publish).
-//   3. Paste it between the quotes below, commit and push. (Or set a GitHub repository variable
-//      named WEB3FORMS_KEY; the deploy workflow passes it in as VITE_WEB3FORMS_KEY.)
-// Until a valid key is set, the form falls back to opening the visitor's mail app.
-// ---------------------------------------------------------------------------------------------
-export const WEB3FORMS_KEY: string = (import.meta.env.VITE_WEB3FORMS_KEY as string | undefined) || '';
-
-// Contact card people can save to their phone (file is in /public).
-export const vcardUrl: string = `${import.meta.env.BASE_URL}hitesh-chaudhari.vcf`;
+// The contact form sends mail to profile.email through FormSubmit (free, no key or sign-up).
+// One-time step after the site is live: send yourself a test message from the form, then open the
+// email FormSubmit sends to this address and click "Activate Form". After that it works for everyone.
 
 export const roles: string[] = [
   'Full-Stack Senior Software Engineer',

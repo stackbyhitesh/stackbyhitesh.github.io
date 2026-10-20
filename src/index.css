@@ -104,6 +104,8 @@
   h3 { font-weight: 700; }
   :focus-visible { outline: 3px solid var(--b); outline-offset: 3px; }
   a { color: inherit; }
+  ::selection { background: color-mix(in srgb, var(--a) 45%, transparent); color: inherit; }
+  html { scrollbar-color: color-mix(in srgb, var(--a) 60%, transparent) transparent; scrollbar-width: thin; }
 }
 
 /* =========================================================
@@ -115,18 +117,18 @@
 
   .text-grad { background-image: linear-gradient(120deg, var(--a), var(--b)); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .text-grad-anim { background-image: linear-gradient(100deg, var(--a), var(--b), var(--a)); background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent; }
-  .primary-grad { background-image: linear-gradient(120deg, #1d5fe0, #2f7bff); }
 
-  .kick { font: 500 .8rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--b); margin-bottom: 14px; }
+  .kick { display: flex; align-items: center; gap: 10px; font: 500 .8rem/1 var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--b); margin-bottom: 14px; }
+  .kick::before { content: ""; width: 26px; height: 1px; background: currentColor; opacity: .7; }
 
   /* Buttons */
   .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 14px 26px; border-radius: 9999px; border: 1px solid transparent; font: 600 1rem var(--font-sans); text-decoration: none; cursor: pointer; transition: transform .2s, box-shadow .2s, opacity .2s; }
-  .btn-primary { color: #fff; background-image: linear-gradient(120deg, #1d5fe0, #2f7bff); box-shadow: 0 10px 30px -10px var(--a); }
+  .btn-primary { color: #fff; background-image: linear-gradient(120deg, #1d5fe0, #2f7bff); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 10px 30px -10px var(--a); }
   .btn-ghost { color: var(--ink); background: var(--card); border-color: var(--line); }
   .btn:disabled { opacity: .6; cursor: not-allowed; }
   @media (hover: hover) {
     .btn:not(:disabled):hover { transform: translateY(-3px); }
-    .btn-primary:not(:disabled):hover { box-shadow: 0 16px 36px -10px var(--a); }
+    .btn-primary:not(:disabled):hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .28), 0 16px 36px -10px var(--a); }
   }
 
   /* Small frosted-glass surface (chips, icon buttons, floating badges, menus) */
@@ -165,11 +167,16 @@
 
   /* Form fields */
   .field { width: 100%; margin-top: 6px; padding: 13px 15px; border-radius: 12px; border: 1px solid var(--line); background: color-mix(in srgb, var(--bg) 78%, transparent); color: var(--ink); font: 400 1rem var(--font-sans); }
-  .field:focus { outline: 2px solid var(--b); border-color: transparent; }
+  .field { transition: border-color .2s, box-shadow .2s; }
+  .field::placeholder { color: color-mix(in srgb, var(--muted) 70%, transparent); }
+  .field:focus { outline: none; border-color: var(--b); box-shadow: 0 0 0 4px color-mix(in srgb, var(--b) 22%, transparent); }
   .field[aria-invalid="true"] { border-color: #ff6b6b; }
   .field-select { appearance: none; -webkit-appearance: none; padding-right: 42px; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%238a98b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
   .field-select option { background: var(--bg2); color: var(--ink); }
 }
+
+/* A real utility (not a component class) so it also works with variants like peer-checked: and hover: */
+@utility primary-grad { background-image: linear-gradient(120deg, #1d5fe0, #2f7bff); }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }

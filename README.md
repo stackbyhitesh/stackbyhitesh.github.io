@@ -8,25 +8,24 @@ A fast, accessible, single-page portfolio built with **React 18**, **TypeScript*
 - **Vite 6** for the dev server and production build
 - **Vitest** for unit tests, **ESLint** (typescript-eslint, React, React Hooks) for code quality
 - **Tailwind CSS v4** (`@tailwindcss/vite`): styling is utility classes in the components. `src/index.css` only holds the design tokens (dark and light), animations and a few reusable classes (`card`, `btn`, `glass`)
-- Fonts bundled with `@fontsource` (Plus Jakarta Sans, Inter, JetBrains Mono), so nothing loads from third parties (the only outside call is the contact form to Web3Forms)
+- Fonts bundled with `@fontsource` (Plus Jakarta Sans, Inter, JetBrains Mono), so nothing loads from third parties (the only outside call is the contact form to FormSubmit)
 
 ## Live address
 The site is published at **https://stackbyhitesh.github.io/**. That address is the default for the canonical link, link-preview image, sitemap and robots.txt (`vite.config.ts` and the deploy workflow). For a different address, set a repository variable named `SITE_URL`.
 
-## Contact form (free email, no mail app needed)
-Messages go straight to your inbox through [Web3Forms](https://web3forms.com) (free, no server).
-1. Open web3forms.com, enter `chaudharihitesh57@gmail.com` and press **Create Access Key**. The key arrives by email.
-2. Paste it into `WEB3FORMS_KEY` in `src/data.ts` (it is safe to publish), **or** add a repository variable `WEB3FORMS_KEY` under Settings → Secrets and variables → Actions → Variables.
-3. Commit and push. Done.
+## Contact form (free email, no key, no mail app)
+Messages are sent to `profile.email` (`src/data.ts`) through [FormSubmit](https://formsubmit.co). It is free and needs no sign-up.
 
-Until a valid key is set the form falls back to opening the visitor's mail app. Extras: the visitor's email is the Reply-To, a hidden spam trap, a 60-second cooldown, drafts saved in the browser, and a clear error with an "email me directly" link if sending fails.
+**One-time step after the site is live:** open the site, send yourself a test message from the form, then open the email FormSubmit sends to your inbox (check spam) and click **Activate Form**. From then on every message lands in your inbox, with the visitor's email as the Reply-To address.
+
+Extras: a hidden spam trap, a 60-second cooldown, drafts saved in the browser, and a clear error with an "email me directly" link if sending fails. FormSubmit puts your address in the form's web address, so it is visible to anyone who inspects the page (it is already shown on the site).
 
 ## New in v2
 - Tailwind CSS rewrite of every component (same design, dark and light themes)
-- Working contact form (above) with email field, loading, success and error states
-- Quick menu: press **Ctrl/⌘ + K** or **/** to jump to a section, switch theme, copy email, save contact or save the page as PDF
+- Working contact form (above) with email field, topic chips, and loading, success and error states
+- Quick menu: press **Ctrl/⌘ + K** or **/** to jump to a section, switch theme, copy your email and open your links
 - Project filter buttons (categories are set per project in `src/data.ts`)
-- Back-to-top button with a scroll-progress ring, "Share this site" in the footer, "Save this page as PDF"
+- Back-to-top button with a scroll-progress ring, and "Share this site" in the footer
 
 ## Commands
 ```bash
@@ -100,7 +99,6 @@ Within one month of a whole year it shows "about N years" and "~N"; otherwise th
 - `profile.calendar`: adds a "Book a 15-min call" link (Cal.com, Calendly…).
 - `testimonials`: add quotes (for example from LinkedIn recommendations, with permission) and a "Kind words" section appears.
 - `topicOptions`: the choices in the contact form's "What's it about?" menu. The choice is added to the email subject.
-- `public/hitesh-chaudhari.vcf`: the "Save my contact" card. Edit it if your details change.
 
 ## Updating an existing repository from the older JavaScript version
 If you copy this project over an older version of the site, delete the old JavaScript files first. Leftovers such as `vite.config.js` or `src/**/*.jsx` sit next to the new `.ts` / `.tsx` files and break lint, typecheck or the build.
@@ -143,6 +141,9 @@ Every push to `main` runs typecheck, lint, tests, an audit and the build, then d
 5. **For link previews and Google:** in **Settings → Secrets and variables → Actions → Variables**, create a variable named `SITE_URL` with your address, for example `https://www.yourdomain.com/`, then re-run the workflow. This sets the preview image, canonical link and sitemap to your real address.
 
 ## Search and sharing
+- Title, description, keywords, canonical link, Open Graph / Twitter tags and JSON-LD (Person and WebSite) are set in `index.html` and `vite.config.ts`. `robots.txt` and `sitemap.xml` are generated on every build.
+- Icons live in `public/`: `favicon.svg`, `favicon.ico`, PNG sizes, `apple-touch-icon.png` and `site.webmanifest` (with a maskable icon for Android).
+- After deploying, add `https://stackbyhitesh.github.io/` to [Google Search Console](https://search.google.com/search-console) and submit `sitemap.xml` so Google finds the site faster.
 - Link preview (WhatsApp, LinkedIn, X): `og-image.png` plus Open Graph tags. Needs `SITE_URL` (set automatically for `github.io` addresses).
 - `robots.txt` and `sitemap.xml` are generated on build.
 - Structured data (schema.org Person) is in `index.html`.

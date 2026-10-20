@@ -1,19 +1,15 @@
 import type { ContactInput } from './security';
 import { safeStorage } from './storage';
 
-/** Free form-to-email service. The access key is public by design (it can only send mail to its owner). */
-export const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+/** Free form-to-email service. No key needed: the owner's address is part of the URL. */
+export const FORMSUBMIT_ENDPOINT = 'https://formsubmit.co/ajax/';
 
 export type ContactValues = Required<ContactInput>;
 export type SendResult = { ok: true } | { ok: false; error: string };
 
-/** Web3Forms keys are UUIDs. Anything else (empty, placeholder) means "not set up yet". */
-export const isValidAccessKey = (key: unknown): key is string =>
-  typeof key === 'string' && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(key.trim());
-
 interface SendOptions {
-  accessKey: string;
-  endpoint?: string;
+  /** The inbox that receives the messages. */
+  to: string;
   timeoutMs?: number;
   /** Replaceable in tests. */
   fetchImpl?: typeof fetch;
@@ -22,29 +18,33 @@ interface SendOptions {
 /** Sends the message to the mail service. Never throws: always returns { ok } with a friendly error. */
 export async function sendContact(
   values: ContactValues,
-  { accessKey, endpoint = WEB3FORMS_ENDPOINT, timeoutMs = 12_000, fetchImpl = fetch }: SendOptions
+  { to, timeoutMs = 12_000, fetchImpl = fetch }: SendOptions
 ): Promise<SendResult> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
-    const res = await fetchImpl(endpoint, {
+    const res = await fetchImpl(`${FORMSUBMIT_ENDPOINT}${encodeURI(to)}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
-        access_key: accessKey.trim(),
-        subject: `Portfolio message from ${values.name}${values.topic ? ' – ' + values.topic : ''}`,
-        from_name: 'Portfolio website',
+        _subject: `Portfolio message from ${values.name}${values.topic ? ' – ' + values.topic : ''}`,
+        _template: 'table',
+        _captcha: 'false',
+        _honey: '',
         name: values.name,
-        email: values.email, // used as the Reply-To address
+        email: values.email, // FormSubmit uses this as the Reply-To address
         company: values.company || '(not given)',
         topic: values.topic,
         message: values.message,
-        botcheck: false,
       }),
       signal: controller.signal,
     });
-    const data = (await res.json().catch(() => null)) as { success?: boolean; message?: string } | null;
-    if (res.ok && data?.success) return { ok: true };
+    const data = (await res.json().catch(() => null)) as { success?: boolean | string; message?: string } | null;
+    // FormSubmit answers with the string "true" / "false" as well as real booleans.
+    if (res.ok && (data?.success === true || data?.success === 'true')) return { ok: true };
+    if (data?.message && /activat/i.test(data.message)) {
+      return { ok: false, error: 'The form is not activated yet. FormSubmit has emailed the site owner a one-time activation link.' };
+    }
     return { ok: false, error: data?.message || `The mail service replied with an error (${res.status}).` };
   } catch (err) {
     const timedOut = err instanceof DOMException && err.name === 'AbortError';

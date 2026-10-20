@@ -16,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="pt-5 pb-[calc(60px+env(safe-area-inset-bottom,0px))] text-center text-[.85rem] text-muted">
+    <footer className="relative pt-5 pb-[calc(60px+env(safe-area-inset-bottom,0px))] text-center text-[.85rem] text-muted">
       <div className="wrap pt-[clamp(56px,9vw,90px)] pb-[30px] text-center">
         <h2 className="mx-auto mb-[26px] max-w-none text-[clamp(2rem,1rem+4.4vw,4.5rem)] font-extrabold text-ink">
           Let's stay <span className="text-grad-anim animate-sheen">connected</span>.

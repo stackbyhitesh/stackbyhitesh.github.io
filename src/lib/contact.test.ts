@@ -1,38 +1,33 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { COOLDOWN_MS, cooldownLeft, isValidAccessKey, markSent, sendContact, type ContactValues } from './contact';
+import { COOLDOWN_MS, cooldownLeft, markSent, sendContact, type ContactValues } from './contact';
 
 const values: ContactValues = { name: 'Asha', email: 'asha@example.com', company: '', topic: 'A project idea', message: 'Loved your portfolio!' };
-const KEY = '1a2b3c4d-1234-5678-9abc-def012345678';
+const TO = 'owner@example.com';
 const reply = (body: unknown, status = 200) => Promise.resolve(new Response(JSON.stringify(body), { status }));
 
-describe('isValidAccessKey', () => {
-  it('accepts a UUID and rejects placeholders', () => {
-    expect(isValidAccessKey(KEY)).toBe(true);
-    expect(isValidAccessKey('')).toBe(false);
-    expect(isValidAccessKey('PASTE-YOUR-KEY-HERE')).toBe(false);
-    expect(isValidAccessKey(undefined)).toBe(false);
-  });
-});
-
 describe('sendContact', () => {
-  it('posts JSON with the access key and reply-to email', async () => {
-    const fetchImpl = vi.fn(() => reply({ success: true }));
-    const result = await sendContact(values, { accessKey: KEY, fetchImpl: fetchImpl as unknown as typeof fetch });
-    expect(result).toEqual({ ok: true });
+  const send = (fetchImpl: unknown) => sendContact(values, { to: TO, fetchImpl: fetchImpl as typeof fetch });
+
+  it('posts JSON to the owner address with the visitor as reply-to', async () => {
+    const fetchImpl = vi.fn(() => reply({ success: 'true', message: 'ok' }));
+    expect(await send(fetchImpl)).toEqual({ ok: true });
     const [url, init] = fetchImpl.mock.calls[0] as unknown as [string, RequestInit];
-    expect(url).toBe('https://api.web3forms.com/submit');
-    const body = JSON.parse(String(init.body));
-    expect(body).toMatchObject({ access_key: KEY, name: 'Asha', email: 'asha@example.com', message: 'Loved your portfolio!' });
+    expect(url).toBe('https://formsubmit.co/ajax/owner@example.com');
+    expect(JSON.parse(String(init.body))).toMatchObject({ name: 'Asha', email: 'asha@example.com', message: 'Loved your portfolio!', _captcha: 'false' });
+  });
+  it('accepts a real boolean success too', async () => {
+    expect(await send(() => reply({ success: true }))).toEqual({ ok: true });
   });
   it('returns the service message on failure', async () => {
-    const fetchImpl = () => reply({ success: false, message: 'Invalid access key' }, 400);
-    const result = await sendContact(values, { accessKey: KEY, fetchImpl: fetchImpl as unknown as typeof fetch });
-    expect(result).toEqual({ ok: false, error: 'Invalid access key' });
+    expect(await send(() => reply({ success: 'false', message: 'Something broke' }, 400))).toEqual({ ok: false, error: 'Something broke' });
+  });
+  it('explains the one-time activation step', async () => {
+    const result = await send(() => reply({ success: 'false', message: 'This form needs Activation. Check your email.' }));
+    expect(result.ok).toBe(false);
+    expect(!result.ok && result.error).toMatch(/activat/i);
   });
   it('turns a network error into a friendly message (never throws)', async () => {
-    const fetchImpl = () => Promise.reject(new TypeError('Failed to fetch'));
-    const result = await sendContact(values, { accessKey: KEY, fetchImpl: fetchImpl as unknown as typeof fetch });
-    expect(result.ok).toBe(false);
+    expect((await send(() => Promise.reject(new TypeError('Failed to fetch')))).ok).toBe(false);
   });
 });
 

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { profile, sections, vcardUrl } from '../data';
+import { profile, sections } from '../data';
 import { useTheme } from '../context/ThemeContext';
 import { useToast } from '../context/ToastContext';
 import { filterCommands, type Command } from '../lib/commands';
@@ -33,11 +33,6 @@ export default function CommandPalette({ open, onClose, onToggle }: Props) {
       {
         id: 'copy-email', label: 'Copy email address', group: 'Action', keywords: 'mail gmail',
         run: () => { navigator.clipboard.writeText(profile.email).then(() => toast('Email copied'), () => toast(profile.email)); },
-      },
-      { id: 'print', label: 'Save this page as PDF', group: 'Action', keywords: 'resume cv print download', run: () => setTimeout(() => window.print(), 150) },
-      {
-        id: 'vcard', label: 'Save my contact card', group: 'Action', keywords: 'vcard download phone',
-        run: () => { const a = document.createElement('a'); a.href = vcardUrl; a.download = ''; a.click(); },
       },
       { id: 'email', label: 'Write an email', group: 'Link', keywords: 'mail contact', run: () => { window.location.href = `mailto:${profile.email}`; } },
       { id: 'call', label: 'Call Hitesh', group: 'Link', keywords: 'phone', run: () => { window.location.href = `tel:${profile.tel}`; } },

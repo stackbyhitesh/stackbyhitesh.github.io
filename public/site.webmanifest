@@ -1,0 +1,15 @@
+{
+  "name": "Hitesh Chaudhari | Senior Full-Stack Engineer",
+  "short_name": "Hitesh.dev",
+  "description": "Portfolio of Hitesh Chaudhari, a senior full-stack engineer and tech lead.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#050b1a",
+  "theme_color": "#050b1a",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
