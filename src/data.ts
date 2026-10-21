@@ -198,8 +198,8 @@ export const education: Pair[] = [
 export const achievements: Achievement[] = [
   { slug: 'heros', title: "Hero's Award", note: 'Awarded for engineering excellence' },
   { slug: 'prodigy', title: 'Prodigy Award', note: 'Awarded for engineering excellence' },
-  { slug: 'super-achiever', title: 'Super Achiever Award', note: 'Awarded for engineering excellence' },
   { slug: 'tech-titan', title: 'Tech Titan Award', note: 'Awarded for engineering excellence' },
+  { slug: 'office-olympix', title: 'Office Olympix - 1st Place', note: 'Awarded for exceptional performance in Office Olympix' },
 ];
 
 // Shown as small tags in the contact section.

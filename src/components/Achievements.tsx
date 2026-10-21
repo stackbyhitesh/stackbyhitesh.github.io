@@ -106,7 +106,7 @@ export default function Achievements() {
                   onClick={() => setIndex(at)}
                   aria-label={`View ${a.title}`}
                 >
-                  <img className="block size-full object-cover transition-transform duration-500 group-hover:scale-[1.06]" src={withImages[at].src} alt={a.title} loading="lazy" decoding="async" />
+                  <img className="block size-full object-contain transition-transform duration-500 group-hover:scale-[1.06]" src={withImages[at].src} alt={a.title} loading="lazy" decoding="async" />
                 </button>
               ) : (
                 <div className="grid aspect-[4/3] w-full place-items-center bg-[linear-gradient(135deg,color-mix(in_srgb,var(--a)_35%,transparent),color-mix(in_srgb,var(--b)_16%,transparent)),var(--bg2)] text-accent2"><Medal /></div>
