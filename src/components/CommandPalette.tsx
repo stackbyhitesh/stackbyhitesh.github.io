@@ -34,6 +34,19 @@ export default function CommandPalette({ open, onClose, onToggle }: Props) {
         id: 'copy-email', label: 'Copy email address', group: 'Action', keywords: 'mail gmail',
         run: () => { navigator.clipboard.writeText(profile.email).then(() => toast('Email copied'), () => toast(profile.email)); },
       },
+      ...(profile.resume
+        ? [{
+            id: 'resume', label: 'Download resume (PDF)', group: 'Action', keywords: 'cv curriculum vitae',
+            run: () => {
+              const a = document.createElement('a');
+              a.href = profile.resume;
+              a.download = 'Hitesh_Chaudhari_Resume.pdf';
+              document.body.appendChild(a);
+              a.click();
+              a.remove();
+            },
+          } satisfies Command]
+        : []),
       { id: 'email', label: 'Write an email', group: 'Link', keywords: 'mail contact', run: () => { window.location.href = `mailto:${profile.email}`; } },
       { id: 'call', label: 'Call Hitesh', group: 'Link', keywords: 'phone', run: () => { window.location.href = `tel:${profile.tel}`; } },
       { id: 'whatsapp', label: 'Chat on WhatsApp', group: 'Link', keywords: 'message', run: () => openLink(profile.whatsapp) },

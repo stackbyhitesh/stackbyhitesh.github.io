@@ -134,6 +134,7 @@ export default function Contact() {
             <button type="button" className={linkRow} onClick={copyEmail}><LinkRow icon="mail" title={profile.email} action={copyLabel} /></button>
             <a className={linkRow} href={`tel:${profile.tel}`}><LinkRow icon="phone" title={profile.phone} action="Call" /></a>
             <ExternalLink className={linkRow} href={profile.whatsapp}><LinkRow icon="chat" title="WhatsApp" action="Chat" /></ExternalLink>
+            {profile.resume && <a className={linkRow} href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf"><LinkRow icon="file" title="Resume (PDF)" action="Download" /></a>}
             <ExternalLink className={linkRow} href={profile.linkedin}><LinkRow icon="linkedin" title="LinkedIn" action="Connect" /></ExternalLink>
             {profile.github && <ExternalLink className={linkRow} href={profile.github}><LinkRow icon="github" title="GitHub" action="Follow" /></ExternalLink>}
             {profile.calendar && <ExternalLink className={linkRow} href={profile.calendar}><LinkRow icon="calendar" title="Book a 15-min call" action="Schedule" /></ExternalLink>}

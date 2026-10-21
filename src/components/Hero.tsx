@@ -4,6 +4,7 @@ import { badges, profile, roles } from '../data';
 import { useTilt, useTyping } from '../hooks';
 import { getExperience } from '../lib/experience';
 import ExternalLink from './ExternalLink';
+import Icon from './icons';
 import MagneticLink from './MagneticLink';
 
 const svg = { viewBox: '0 0 24 24', width: 20, height: 20, 'aria-hidden': true };
@@ -48,6 +49,11 @@ export default function Hero() {
         <div className="flex flex-wrap gap-3">
           <MagneticLink className="btn btn-primary max-xs:flex-[1_1_100%]" href="#contact">Say hello</MagneticLink>
           <MagneticLink className="btn btn-ghost max-xs:flex-[1_1_100%]" href="#projects">See my work</MagneticLink>
+          {profile.resume && (
+            <MagneticLink className="btn btn-ghost max-xs:flex-[1_1_100%] print:hidden" href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf">
+              <Icon name="download" size={18} />Resume
+            </MagneticLink>
+          )}
         </div>
         <div className="mt-[26px] flex flex-wrap gap-2.5">
           {['Senior Full-Stack Engineer', 'Tech Lead', 'Forward Deployed Engineer'].map((t) => (

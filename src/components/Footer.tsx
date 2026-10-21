@@ -24,6 +24,7 @@ export default function Footer() {
         <a className="inline-block border-b-2 border-accent2 pb-1 font-display text-[clamp(1rem,.7rem+1.4vw,1.75rem)] font-bold no-underline [overflow-wrap:anywhere]" href={`mailto:${profile.email}`}>{profile.email}</a>
         <div className="mt-[34px] flex flex-wrap items-center justify-center gap-x-6 gap-y-3 print:hidden">
           <a className="text-[.85rem] text-muted no-underline hover:text-ink" href="#top">Back to top ↑</a>
+          {profile.resume && <a className="text-[.85rem] text-muted no-underline hover:text-ink" href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf">Download resume ↓</a>}
           <button type="button" onClick={share} className="cursor-pointer text-[.85rem] text-muted hover:text-ink">Share this site ↗</button>
         </div>
       </div>

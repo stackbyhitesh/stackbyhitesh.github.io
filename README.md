@@ -94,6 +94,9 @@ Cards without an image show a medal placeholder. Clicking a card with an image o
 Years and months of experience are calculated from today's date (hero text, "What I do" text and the stats strip). The start date is `CAREER_START` in `src/lib/experience.ts` (September 2018).
 Within one month of a whole year it shows "about N years" and "~N"; otherwise the exact value, for example "8 years and 3 months" and "8+".
 
+## Resume
+The resume PDF is `public/Hitesh_Chaudhari_Resume.pdf`. It is linked from the hero ("Resume" button), the contact list, the footer, the mobile menu and the quick menu (Ctrl/⌘ + K → "Download resume"). To update it, replace that file and keep the name. To hide every resume button, set `profile.resume` to `''` in `src/data.ts`.
+
 ## Optional extras (all in `src/data.ts`)
 - `profile.github`: adds a GitHub icon and link.
 - `profile.calendar`: adds a "Book a 15-min call" link (Cal.com, Calendly…).

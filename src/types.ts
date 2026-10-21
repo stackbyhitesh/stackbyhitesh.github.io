@@ -9,6 +9,8 @@ export interface Profile {
   tel: string;
   whatsapp: string;
   linkedin: string;
+  /** Path to the resume PDF in the public folder. Leave empty to hide every resume button. */
+  resume: string;
   /** Optional. Leave empty to hide. */
   github: string;
   /** Optional booking link. Leave empty to hide. */

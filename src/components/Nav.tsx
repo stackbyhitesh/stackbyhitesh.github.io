@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { navLinks, spyIds, spyMap } from '../data';
+import { navLinks, profile, spyIds, spyMap } from '../data';
 import { useScrollSpy } from '../hooks';
 import { useTheme } from '../context/ThemeContext';
 import { navLink, navLinkOn } from '../ui';
@@ -88,6 +88,16 @@ export default function Nav({ onOpenPalette }: Props) {
             {label}
           </a>
         ))}
+        {profile.resume && (
+          <a
+            className="flex items-center justify-between rounded-xl px-4 py-3.5 text-ink no-underline hover:bg-card"
+            href={profile.resume}
+            download="Hitesh_Chaudhari_Resume.pdf"
+            onClick={() => setOpen(false)}
+          >
+            Resume <span className="font-mono text-[.75rem] text-muted">PDF ↓</span>
+          </a>
+        )}
         <button
           type="button"
           className="flex items-center justify-between rounded-xl px-4 py-3.5 text-left text-ink hover:bg-card"

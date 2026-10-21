@@ -9,6 +9,8 @@ const paths = {
   send: <><path d="m22 2-11 11" /><path d="m22 2-7 20-4-9-9-4 20-7Z" /></>,
   check: <path d="m5 12.5 4.5 4.5L19 7.5" />,
   copy: <><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></>,
+  file: <><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z" /><path d="M14 3v5h5M9 13h6M9 17h4" /></>,
+  download: <path d="M12 4v11m0 0-4-4m4 4 4-4M5 20h14" />,
   arrow: <path d="M7 17 17 7M8 7h9v9" />,
 };
 const filled = {

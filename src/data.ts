@@ -11,6 +11,9 @@ export const profile: Profile = {
   // WhatsApp opens with this message already typed.
   whatsapp: 'https://wa.me/918268946878?text=' + encodeURIComponent('Hi Hitesh, I came across your portfolio and would like to connect.'),
   linkedin: 'https://linkedin.com/in/eng-hitesh-chaudhari',
+  // The resume PDF lives in the public folder. To update it, replace public/Hitesh_Chaudhari_Resume.pdf (same name).
+  // Set this to '' to hide every resume button.
+  resume: './Hitesh_Chaudhari_Resume.pdf',
   // Optional: add full https links to show them automatically.
   github: '',    // e.g. 'https://github.com/your-username'
   calendar: '',  // e.g. 'https://cal.com/your-name/15min' adds a "Book a 15-min call" link
