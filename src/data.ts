@@ -75,9 +75,9 @@ export const stats: Stat[] = [
 
 export const jobs: Job[] = [
   {
-    company: 'OpenText', role: 'Senior Software Engineer', meta: 'Enterprise data platform',
+    company: 'OpenText', role: 'Senior Software Engineer', meta: 'Enterprise data platform · Full-stack',
     period: 'Nov 2025 – Present', start: '2025-11', now: true,
-    summary: 'I make a large enterprise data platform fast and smooth, and I build AI tools that help the team write code faster.',
+    summary: 'I own a large enterprise data platform end to end, from Node.js APIs and Redis caching to a smooth user interface, and I build AI tools that help the team write code faster.',
     results: [
       { value: '−18%', label: 'API response time' },
       { value: '35K+', label: 'records shown smoothly' },
@@ -85,18 +85,19 @@ export const jobs: Job[] = [
       { value: '85%+', label: 'automated test coverage' },
     ],
     points: [
+      'Own delivery across the whole stack: Node.js REST APIs and microservices for global enterprise customers, and the screens that sit on top of them.',
+      'Made the platform load data up to 18% faster by caching results on the server (Redis) and in the browser.',
       'Fixed a screen that froze when showing 35,000+ records. It now stays smooth (using virtual scrolling, lazy loading and delayed input handling).',
-      'Made the platform load data up to 18% faster by caching results in the browser and on the server (Redis).',
-      "Built an AI coding assistant inside VS Code (GitHub Copilot) that follows the team's coding rules, and an internal AI tool (RAG) that cut repetitive coding time by 25%.",
       'Rebuilt key screens with Material UI and Tailwind CSS for a consistent, more accessible look.',
-      'Keep the backend (Node.js and Java) reliable, with 85%+ automated test coverage and regular code reviews.',
+      "Built an AI coding assistant inside VS Code (GitHub Copilot) that follows the team's coding rules, and an internal AI tool (RAG) that cut repetitive coding time by 25%.",
+      'Keep the whole stack reliable, with 85%+ automated test coverage, CI/CD pipelines and regular code reviews.',
     ],
-    tags: ['Node.js', 'Java', 'Redis', 'MUI', 'Tailwind', 'Copilot Agent', 'RAG'],
+    tags: ['Node.js', 'REST APIs', 'Microservices', 'Redis', 'MUI', 'Tailwind', 'Copilot Agent', 'RAG'],
   },
   {
-    company: 'Bajaj Finserv', role: 'Tech Lead', meta: 'Fintech',
+    company: 'Bajaj Finserv', role: 'Tech Lead', meta: 'Fintech · Full-stack',
     period: 'Mar 2023 – Nov 2025', start: '2023-03', end: '2025-11',
-    summary: 'I led a team of 6 engineers building modules used by over 110 million people, from planning to release.',
+    summary: 'I led a team of 6 engineers building full-stack modules used by over 110 million people, from planning to release.',
     results: [
       { value: '110M+', label: 'users on my modules' },
       { value: '6', label: 'engineers led' },
@@ -104,13 +105,15 @@ export const jobs: Job[] = [
       { value: '−14%', label: 'API response time' },
     ],
     points: [
+      'Delivered 6 business-critical modules end to end (backend services, APIs, database and screens) across 20+ releases with minimal defects.',
       'Led and mentored 6 engineers: planning sprints, making architecture decisions and delivering work for modules used by 110M+ users.',
-      'Delivered 6 business-critical modules end to end (screens plus backend) across 20+ releases with minimal defects.',
-      'Built an internal Engineering CRM from scratch to track sprints and automate workflows. The whole team adopted it.',
-      'Sped up APIs by up to 14% with database indexing and caching (browser and Redis).',
-      'Added secure payments (Bajaj Pay SDK) and single sign-on (SSO) login across core modules.',
+      'Added secure payments (Bajaj Pay SDK) in the backend services and single sign-on (SSO) login across core modules.',
+      'Sped up APIs by up to 14% with database indexing, query tuning and caching (Redis and browser).',
+      'Adopted Module Federation with a single codebase for the frontend, recognised with the Tech Titan Award.',
+      'Built an internal Engineering CRM from scratch (Node.js backend and a web UI) to track sprints and automate workflows. The whole team adopted it.',
+      'Built and maintained CI/CD pipelines and set best practices through code reviews and mentoring.',
     ],
-    tags: ['Node.js', 'PWA', 'Redis', 'SSO', 'Bajaj Pay SDK', 'CI/CD'],
+    tags: ['Node.js', 'Redis', 'Module Federation', 'PWA', 'SSO', 'Bajaj Pay SDK', 'CI/CD'],
   },
   {
     company: 'Chetu India', role: 'Senior Software Engineer', meta: 'Enterprise solutions',
@@ -176,17 +179,17 @@ export const projects: Project[] = [
 ];
 
 export const marquee: string[][] = [
-  ['React', 'Angular', 'Next.js', 'TypeScript', 'Node.js', 'Java', 'PWA', 'Tailwind CSS', 'Material UI', 'GraphQL', 'Microservices'],
+  ['React', 'Angular', 'Next.js', 'TypeScript', 'Node.js', 'PWA', 'Tailwind CSS', 'Material UI', 'GraphQL', 'Microservices'],
   ['Redis', 'PostgreSQL', 'MongoDB', 'AWS', 'Azure', 'Docker', 'Kubernetes', 'RAG', 'LangChain', 'Copilot Agents', 'OAuth 2.0'],
 ];
 
 export const skillGroups: SkillGroup[] = [
   { title: 'Frontend', tags: ['React', 'Angular', 'Next.js', 'TypeScript', 'RxJS', 'NgRx', 'Redux Toolkit', 'Module Federation'] },
-  { title: 'Backend and APIs', tags: ['Node.js', 'Java', 'REST', 'GraphQL', 'Microservices'] },
+  { title: 'Backend and APIs', tags: ['Node.js', 'REST', 'GraphQL', 'Microservices'] },
   { title: 'AI-assisted development', tags: ['Copilot Agent mode', 'RAG', 'Vector DB', 'LangChain', 'LlamaIndex', 'OpenAI API', 'Anthropic API'] },
   { title: 'Data and cloud', tags: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'AWS', 'Azure', 'Docker', 'Kubernetes'] },
   { title: 'Payments and security', tags: ['Stripe', 'Razorpay', 'Bajaj Pay SDK', 'OAuth 2.0', 'JWT', 'SSO'] },
-  { title: 'Quality and delivery', tags: ['Jasmine', 'Karma', 'JUnit', 'Cypress', 'TDD', 'SonarQube', 'CI/CD', 'Agile'] },
+  { title: 'Quality and delivery', tags: ['Jasmine', 'Karma', 'Cypress', 'TDD', 'SonarQube', 'CI/CD', 'Agile'] },
 ];
 
 export const education: Pair[] = [
@@ -196,14 +199,14 @@ export const education: Pair[] = [
 
 // Image for each award: add a file named after the slug to src/assets/achievements (for example prodigy.jpg).
 export const achievements: Achievement[] = [
-  { slug: 'heros', title: "Hero's Award", note: 'Awarded for engineering excellence' },
-  { slug: 'prodigy', title: 'Prodigy Award', note: 'Awarded for engineering excellence' },
-  { slug: 'tech-titan', title: 'Tech Titan Award', note: 'Awarded for engineering excellence' },
+  { slug: 'heros', title: "Hero's Award", note: 'Recognised for exceptional contribution' },
+  { slug: 'prodigy', title: 'Prodigy Award', note: 'Certified Mobile and Web App Developer' },
+  { slug: 'tech-titan', title: 'Tech Titan Award', note: 'Recognised for Module Federation and Single CodeBase' },
   { slug: 'office-olympix', title: 'Office Olympix - 1st Place', note: 'Awarded for exceptional performance in Office Olympix' },
 ];
 
 // Shown as small tags in the contact section.
-export const topics: string[] = ['Frontend performance', 'AI-assisted development', 'Engineering leadership'];
+export const topics: string[] = ['Full-stack performance', 'AI-assisted development', 'Engineering leadership'];
 
 // Options in the "What's it about?" menu of the contact form.
 export const topicOptions: string[] = ['Just saying hello', 'A project idea', 'Collaboration', 'A question about my work', 'Something else'];
