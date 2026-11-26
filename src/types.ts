@@ -15,6 +15,8 @@ export interface Profile {
   github: string;
   /** Optional booking link. Leave empty to hide. */
   calendar: string;
+  /** Short availability line with a pulsing dot in the hero. Leave empty to hide. */
+  status: string;
 }
 
 /** A pair of strings, for example [title, description]. */

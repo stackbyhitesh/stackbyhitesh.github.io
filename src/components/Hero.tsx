@@ -30,6 +30,11 @@ export default function Hero() {
     <div className="grid items-center gap-[clamp(24px,4vw,48px)] pt-6 pb-[clamp(32px,6vw,64px)] md:min-h-[min(780px,calc(100svh-80px))] md:grid-cols-[1.3fr_.7fr] md:pt-[clamp(32px,6vw,64px)] [@media(max-height:520px)_and_(orientation:landscape)]:min-h-0">
       <div>
         <div className="mb-[clamp(18px,3vw,26px)] flex flex-wrap gap-2.5">
+          {profile.status && (
+            <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-[7px] font-mono text-[.78rem] font-medium text-ink">
+              <span className="status-dot" aria-hidden="true" />{profile.status}
+            </span>
+          )}
           <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-[7px] font-mono text-[.78rem] font-medium text-muted">📍 Currently in {profile.location}</span>
           <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-[7px] font-mono text-[.78rem] font-medium text-muted">🏠 Hometown: {profile.hometown}</span>
         </div>
@@ -82,6 +87,7 @@ export default function Hero() {
         ref={areaRef}
         aria-hidden="true"
       >
+        <div className="hero-orbit" />
         <div
           className="ring-photo relative aspect-square w-[clamp(200px,44vw,320px)] rounded-full p-[7px] transition-transform duration-250 ease-out [transform:perspective(900px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))]"
           ref={ringRef}
@@ -91,7 +97,7 @@ export default function Hero() {
         {badges.map(([value, label], i) => (
           <div
             key={value}
-            className={`glass-2 absolute z-[2] animate-float rounded-2xl px-3 py-2 text-[.72rem] leading-[1.3] shadow-[inset_0_1px_0_var(--glass-hi),0_24px_44px_-24px_rgba(0,0,0,.55)] xs:px-4 xs:py-3 xs:text-[.85rem] ${badgePositions[i]}`}
+            className={`glass-2 absolute z-[2] animate-float rounded-2xl px-3 py-2 text-[.72rem] leading-[1.3] xs:px-4 xs:py-3 xs:text-[.85rem] ${badgePositions[i]}`}
           >
             <strong className="block font-display text-base font-extrabold xs:text-[1.35rem]">{value}</strong>{label}
           </div>

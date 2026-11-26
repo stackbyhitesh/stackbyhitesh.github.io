@@ -48,12 +48,12 @@ function reducer(state: State, action: Action): State {
 
 // ---- Small pieces ----
 const linkRow =
-  'group glass flex min-w-0 cursor-pointer items-center gap-3.5 rounded-2xl bg-[linear-gradient(145deg,var(--glass-2),var(--glass))] px-4 py-3.5 text-left text-[.95rem] font-medium text-ink no-underline transition duration-200 hover:translate-x-1 hover:border-accent2';
+  'group glass flex min-w-0 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left text-[.95rem] font-medium text-ink no-underline transition duration-200 hover:translate-x-1 hover:border-accent2';
 
 function LinkRow({ icon, title, action }: { icon: IconName; title: string; action: string }) {
   return (
     <>
-      <span className="grid size-10 flex-none place-items-center rounded-xl bg-accent/15 text-accent2 transition-colors group-hover:bg-accent2/20"><Icon name={icon} /></span>
+      <span className="grid size-10 flex-none place-items-center rounded-xl border border-accent2/25 bg-accent2/12 text-accent2 transition-colors group-hover:bg-accent2/22"><Icon name={icon} /></span>
       <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">{title}</span>
       <span className="flex flex-none items-center gap-1 text-[.85rem] font-semibold text-accent2">{action}<Icon name="arrow" size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
     </>
@@ -124,7 +124,7 @@ export default function Contact() {
 
   return (
     <Section id="contact">
-      <Reveal className="print-box relative grid gap-[clamp(28px,5vw,48px)] overflow-hidden rounded-[clamp(22px,3vw,32px)] border border-line bg-[linear-gradient(135deg,color-mix(in_srgb,var(--a)_26%,var(--bg2)),color-mix(in_srgb,var(--b)_16%,var(--bg2)))] p-[clamp(20px,5vw,56px)] before:pointer-events-none before:absolute before:-top-28 before:-right-24 before:size-80 before:rounded-full before:bg-accent2/25 before:blur-3xl after:pointer-events-none after:absolute after:-bottom-32 after:-left-24 after:size-80 after:rounded-full after:bg-accent/30 after:blur-3xl md:grid-cols-[1fr_1.05fr] [&>*]:relative [&>*]:z-[1]">
+      <Reveal className="print-box panel relative grid gap-[clamp(28px,5vw,48px)] overflow-hidden rounded-[clamp(22px,3vw,32px)] p-[clamp(20px,5vw,56px)] before:pointer-events-none before:absolute before:-top-28 before:-right-24 before:size-96 before:rounded-full before:bg-accent/20 before:blur-3xl after:pointer-events-none after:absolute after:-bottom-32 after:-left-24 after:size-96 after:rounded-full after:bg-accent/10 after:blur-3xl md:grid-cols-[1fr_1.05fr] [&>*]:relative [&>*]:z-[1]">
         <div>
           <div className="kick">Contact</div>
           <h2 className="mb-4 max-w-[14ch] text-[clamp(2rem,1rem+3vw,3.4rem)] font-extrabold">Let's build something <span className="text-grad">great</span>.</h2>
@@ -177,7 +177,7 @@ export default function Contact() {
                   {topicOptions.map((t) => (
                     <label key={t} className="cursor-pointer">
                       <input type="radio" name="topic" className="peer sr-only" value={t} checked={values.topic === t} onChange={() => dispatch({ type: 'change', field: 'topic', value: t })} />
-                      <span className="block rounded-full border border-line bg-card px-3.5 py-2 text-[.85rem] text-muted transition-colors peer-checked:primary-grad peer-checked:border-transparent peer-checked:text-white peer-checked:shadow-[0_8px_20px_-10px_var(--a)] peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent2 hover:text-ink peer-checked:hover:text-white">{t}</span>
+                      <span className="block rounded-full border border-line bg-card px-3.5 py-2 text-[.85rem] text-muted transition-colors peer-checked:primary-grad peer-checked:border-transparent peer-checked:text-white peer-checked: peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent2 hover:text-ink peer-checked:hover:text-white">{t}</span>
                     </label>
                   ))}
                 </div>

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import Tag from './TechIcon';
 import Reveal, { stagger } from './Reveal';
 import Section from './Section';
 import { projects } from '../data';
@@ -24,7 +25,7 @@ export default function Projects() {
             aria-pressed={category === c}
             onClick={() => setCategory(c)}
             className={`cursor-pointer rounded-full border px-4 py-2 font-mono text-[.8rem] font-medium transition-colors ${
-              category === c ? 'primary-grad border-transparent text-white shadow-[0_8px_20px_-10px_var(--a)]' : 'glass text-muted hover:text-ink'
+              category === c ? 'primary-grad border-transparent text-white' : 'glass text-muted hover:text-ink'
             }`}
           >
             {c}
@@ -38,7 +39,7 @@ export default function Projects() {
             <div className="text-grad font-display text-[clamp(1.8rem,1.4rem+1.2vw,2.3rem)] leading-none font-extrabold tracking-[-.03em]">{p.big}</div>
             <h3>{p.title}</h3>
             <p>{p.text}</p>
-            <div className="tag-list mt-auto pt-1.5">{p.tags.map((t) => <span key={t}>{t}</span>)}</div>
+            <div className="tag-list mt-auto pt-1.5">{p.tags.map((t) => <Tag key={t} name={t} />)}</div>
           </Reveal>
         ))}
       </div>

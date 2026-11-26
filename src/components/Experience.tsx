@@ -1,4 +1,5 @@
 import CareerChart from './CareerChart';
+import Tag from './TechIcon';
 import Reveal, { stagger } from './Reveal';
 import Section from './Section';
 import { jobs } from '../data';
@@ -17,7 +18,7 @@ export default function Experience() {
         </p>
       </Reveal>
       <CareerChart />
-      <div className="relative grid gap-[22px] pl-[clamp(26px,4vw,34px)] before:absolute before:top-2 before:bottom-2 before:left-2 before:w-0.5 before:bg-linear-to-b before:from-accent before:via-accent2 before:to-transparent">
+      <div className="relative grid gap-[22px] pl-[clamp(26px,4vw,34px)] before:absolute before:top-2 before:bottom-2 before:left-2 before:w-0.5 before:bg-linear-to-b before:from-accent before:to-transparent">
         {jobs.map((job, i) => (
           <Reveal as="article" key={job.company + job.period} className="card relative" delay={stagger(i)}>
             {/* Timeline dot */}
@@ -39,7 +40,7 @@ export default function Experience() {
             <p className="mt-4 mb-[18px] max-w-[62ch] text-[clamp(1rem,.95rem+.25vw,1.12rem)] leading-[1.55] text-ink">{job.summary}</p>
             <ul className="m-0 mb-[18px] grid list-none grid-cols-[repeat(auto-fit,minmax(135px,1fr))] gap-2.5 p-0">
               {job.results.map((r) => (
-                <li key={r.value + r.label} className="rounded-[14px] border border-line bg-accent/10 px-3.5 py-3">
+                <li key={r.value + r.label} className="tile px-3.5 py-3">
                   <strong className="block font-display text-[clamp(1.25rem,1.1rem+.6vw,1.55rem)] leading-[1.1] font-extrabold [overflow-wrap:anywhere]">{r.value}</strong>
                   <span className="mt-1 block text-[.8rem] leading-[1.3] text-muted">{r.label}</span>
                 </li>
@@ -53,7 +54,7 @@ export default function Experience() {
                 {job.points.map((p) => <li className="mb-[9px]" key={p}>{p}</li>)}
               </ul>
               <p className="mb-2 font-mono text-[.72rem] font-medium tracking-[.1em] text-muted uppercase">Tech used</p>
-              <div className="tag-list">{job.tags.map((t) => <span key={t}>{t}</span>)}</div>
+              <div className="tag-list">{job.tags.map((t) => <Tag key={t} name={t} />)}</div>
             </details>
           </Reveal>
         ))}

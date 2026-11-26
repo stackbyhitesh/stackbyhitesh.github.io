@@ -31,11 +31,12 @@ export default function Nav({ onOpenPalette }: Props) {
   return (
     <nav
       aria-label="Main"
-      className="sticky top-[calc(env(safe-area-inset-top,0px)+10px)] z-10 mx-auto mt-3 w-[calc(100%-2*var(--gutter))] max-w-[1040px] rounded-full border border-line bg-bg/70 shadow-[0_18px_40px_-24px_#000] backdrop-blur-[14px] print:hidden"
+      className="glass-2 sticky top-[calc(env(safe-area-inset-top,0px)+10px)] z-10 mx-auto mt-3 w-[calc(100%-2*var(--gutter))] max-w-[1040px] rounded-full print:hidden"
     >
       <div className="flex h-[58px] items-center justify-between pr-2 pl-4 xs:pr-3 xs:pl-6">
-        <a className="font-display text-[1.1rem] font-extrabold tracking-[-.02em] no-underline xs:text-[1.25rem]" href="#top">
-          Hitesh<span className="text-grad">.dev</span>
+        <a className="flex items-center gap-2.5 font-display text-[1.1rem] font-extrabold tracking-[-.02em] no-underline xs:text-[1.25rem]" href="#top">
+          <span aria-hidden="true" className="primary-grad grid size-8 place-items-center rounded-[10px] text-[.95rem] font-extrabold text-white">H</span>
+          <span>Hitesh<span className="text-grad">.dev</span></span>
         </a>
         <ul className="m-0 flex list-none items-center gap-0.5 p-0 xs:gap-1">
           {navLinks.map(([id, label]) => (
@@ -48,7 +49,7 @@ export default function Nav({ onOpenPalette }: Props) {
               type="button"
               onClick={onOpenPalette}
               aria-label={`Open quick menu (${isMac ? '⌘' : 'Ctrl'} K)`}
-              className="flex h-10 items-center gap-2 rounded-full border border-line bg-card px-3 font-mono text-[.72rem] text-muted transition-colors hover:border-accent2 hover:text-ink"
+              className="glass flex h-10 cursor-pointer items-center gap-2 rounded-full px-3 font-mono text-[.72rem] text-muted transition-colors hover:border-accent2 hover:text-ink"
             >
               <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
               {isMac ? '⌘' : 'Ctrl'} K

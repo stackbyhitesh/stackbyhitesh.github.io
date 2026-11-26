@@ -19,7 +19,7 @@ export default function CareerChart() {
     .join('. ');
 
   return (
-    <Reveal className="print-box mb-[clamp(28px,4vw,40px)] rounded-3xl border border-line bg-card px-[clamp(16px,2.6vw,28px)] pt-5 pb-[22px]" role="img" aria-label={`Career path. ${summary}.`}>
+    <Reveal className="print-box panel mb-[clamp(28px,4vw,40px)] px-[clamp(16px,2.6vw,28px)] pt-5 pb-[22px]" role="img" aria-label={`Career path. ${summary}.`}>
       <p className="mb-3.5 font-mono text-[.74rem] font-medium tracking-[.12em] text-muted uppercase" aria-hidden="true">Career at a glance</p>
       <div className="grid gap-2" aria-hidden="true">
         <div className="relative h-[18px] sm:ml-[162px]">
@@ -41,7 +41,7 @@ export default function CareerChart() {
               <span className="relative h-4">
                 {years.map((y) => <i className="absolute -top-1 -bottom-1 w-px bg-line" key={y} style={{ left: `${pct(y * 12)}%` }} />)}
                 <span
-                  className={`absolute inset-y-0.5 min-w-1.5 rounded-full ${j.now ? 'bg-[linear-gradient(90deg,#ff9a3c,var(--c))]' : 'bg-[linear-gradient(90deg,var(--a),var(--b))]'}`}
+                  className={`absolute inset-y-0.5 min-w-1.5 rounded-full ${j.now ? 'bg-warm' : 'bg-accent'}`}
                   style={{ left: `${left}%`, width: `${width}%` }}
                   title={`${j.company}: ${j.period}`}
                 />

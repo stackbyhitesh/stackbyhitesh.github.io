@@ -7,6 +7,7 @@ export const profile: Profile = {
   hometown: 'Mumbai',
   email: 'chaudharihitesh57@gmail.com',
   phone: '+91 82689 46878',
+  status: 'Open to opportunities',
   tel: '+918268946878',
   // WhatsApp opens with this message already typed.
   whatsapp: 'https://wa.me/918268946878?text=' + encodeURIComponent('Hi Hitesh, I came across your portfolio and would like to connect.'),

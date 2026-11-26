@@ -1,4 +1,5 @@
 import Marquee from './Marquee';
+import Tag from './TechIcon';
 import Reveal, { stagger } from './Reveal';
 import Section from './Section';
 import { marquee, skillGroups } from '../data';
@@ -18,7 +19,7 @@ export default function Skills() {
         {skillGroups.map((g, i) => (
           <Reveal className="card" delay={stagger(i)} key={g.title}>
             <h3 className="mb-3 text-[1.05rem]">{g.title}</h3>
-            <div className="tag-list">{g.tags.map((t) => <span key={t}>{t}</span>)}</div>
+            <div className="tag-list">{g.tags.map((t) => <Tag key={t} name={t} />)}</div>
           </Reveal>
         ))}
       </div>
