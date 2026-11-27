@@ -5,7 +5,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
-  { ignores: ['dist', 'node_modules'] },
+  { ignores: ['dist', 'node_modules', '.prerender-tmp'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
@@ -21,6 +21,7 @@ export default tseslint.config(
       'react/no-unescaped-entities': 'off',
     },
   },
-  // Root config files (vite.config.*, eslint.config.*) run in Node, so `process` and friends are allowed.
-  { files: ['*.config.{js,mjs,cjs,ts}'], languageOptions: { globals: { ...globals.node } } },
+  // Root config files (vite.config.*, eslint.config.*) and build scripts (scripts/*.mjs) run in Node, so `process`,
+  // `console` and friends are allowed there.
+  { files: ['*.config.{js,mjs,cjs,ts}', 'scripts/**/*.{js,mjs,cjs}'], languageOptions: { ecmaVersion: 2022, globals: { ...globals.node } } },
 );
