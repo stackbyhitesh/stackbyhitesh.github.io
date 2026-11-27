@@ -12,6 +12,7 @@ import Achievements from './components/Achievements';
 import Testimonials from './components/Testimonials';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import Faq from './components/Faq';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
@@ -37,11 +38,12 @@ export default function App() {
         <About />
         <Experience />
         <Process />
+        <Skills />
+        <Education />
         <Projects />
         <Achievements />
         <Testimonials />
-        <Skills />
-        <Education />
+        <Faq />
         <Contact />
       </main>
       <Footer />

@@ -1,6 +1,7 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
+import { buildJsonLd } from './seo.config';
 
 // Content-Security-Policy for the production build.
 // GitHub Pages cannot send HTTP headers, so the policy is added as a <meta> tag.
@@ -31,37 +32,10 @@ const injectCsp = (): Plugin => ({
 const rawSite = (process.env.SITE_URL ?? 'https://stackbyhitesh.github.io/').trim();
 const SITE = rawSite ? rawSite.replace(/\/*$/, '/') : '';
 
-const IMAGE_ALT = 'Hitesh Chaudhari, senior full-stack engineer and tech lead. Portfolio preview card.';
+const IMAGE_ALT = 'Hitesh Chaudhari, freelance full-stack software engineer and tech lead. Portfolio preview card.';
 
-// Structured data (JSON-LD) so Google can understand who the site is about.
-const jsonLd = () =>
-  JSON.stringify({
-    '@context': 'https://schema.org',
-    '@graph': [
-      {
-        '@type': 'Person',
-        '@id': `${SITE}#hitesh`,
-        name: 'Hitesh Chaudhari',
-        url: SITE,
-        image: `${SITE}og-image.png`,
-        jobTitle: 'Senior Full-Stack Engineer and Tech Lead',
-        description: 'Senior full-stack engineer and tech lead building fast, scalable web and mobile products.',
-        worksFor: { '@type': 'Organization', name: 'OpenText' },
-        address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', addressCountry: 'IN' },
-        homeLocation: { '@type': 'Place', name: 'Mumbai, India' },
-        knowsAbout: ['Full-stack development', 'React', 'Node.js', 'TypeScript', 'Performance engineering', 'AI-assisted development'],
-        sameAs: ['https://linkedin.com/in/eng-hitesh-chaudhari'],
-      },
-      {
-        '@type': 'WebSite',
-        '@id': `${SITE}#website`,
-        url: SITE,
-        name: 'Hitesh Chaudhari | Portfolio',
-        inLanguage: 'en',
-        publisher: { '@id': `${SITE}#hitesh` },
-      },
-    ],
-  });
+// Structured data (JSON-LD) is built in seo.config.ts so Google can understand who the site is about and what they offer.
+const jsonLd = () => JSON.stringify(buildJsonLd(SITE));
 
 const seo = (): Plugin => ({
   name: 'seo',

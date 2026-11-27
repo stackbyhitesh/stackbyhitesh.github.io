@@ -38,8 +38,8 @@ export default function Hero() {
           <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-[7px] font-mono text-[.78rem] font-medium text-muted">📍 Currently in {profile.location}</span>
           <span className="glass inline-flex items-center gap-2.5 rounded-full px-4 py-[7px] font-mono text-[.78rem] font-medium text-muted">🏠 Hometown: {profile.hometown}</span>
         </div>
-        <h1 className="text-[clamp(2.2rem,1rem+4.2vw,4.5rem)] leading-[1.04] font-extrabold tracking-[-.035em]">
-          <span className="block">Hi, I'm Hitesh.</span> I build <span className="text-grad-anim animate-sheen">fast, scalable products</span> for millions.
+        <h1 className="text-[clamp(2.1rem,1rem+3.8vw,4.1rem)] leading-[1.06] font-extrabold tracking-[-.035em]">
+          <span className="block">Hi, I'm Hitesh.</span> Freelance full-stack engineer building <span className="text-grad-anim animate-sheen">fast, scalable products.</span>
         </h1>
         <p
           className="mt-[22px] min-h-[1.7em] font-mono text-[clamp(.95rem,.6rem+1.1vw,1.3rem)] font-medium text-ink after:ml-1 after:inline-block after:h-[1.1em] after:w-0.5 after:animate-blink after:bg-accent2 after:align-[-3px]"
@@ -48,8 +48,9 @@ export default function Hero() {
           {typed}
         </p>
         <p className="mt-[18px] mb-[clamp(22px,3vw,32px)] max-w-[52ch] text-muted">
-          {experience.phraseCap} of full-stack engineering across fintech and enterprise software. I lead teams, tune
-          performance, and turn customer requirements into production systems.
+          Freelance software engineer in {profile.location}, India, with {experience.phrase} of full-stack engineering across fintech
+          and enterprise software. I build React and Node.js products, tune performance, and turn customer requirements into
+          production systems.
         </p>
         <div className="flex flex-wrap gap-3">
           <MagneticLink className="btn btn-primary max-xs:flex-[1_1_100%]" href="#contact">Say hello</MagneticLink>
@@ -61,7 +62,7 @@ export default function Hero() {
           )}
         </div>
         <div className="mt-[26px] flex flex-wrap gap-2.5">
-          {['Senior Full-Stack Engineer', 'Tech Lead', 'Forward Deployed Engineer'].map((t) => (
+          {['Freelance Full-Stack Engineer', 'Senior Software Engineer', 'Tech Lead', 'Forward Deployed Engineer'].map((t) => (
             <span key={t} className="glass rounded-full px-3.5 py-1.5 text-[.85rem] text-muted max-[380px]:px-[11px] max-[380px]:py-[5px] max-[380px]:text-[.78rem]">{t}</span>
           ))}
         </div>
@@ -92,7 +93,7 @@ export default function Hero() {
           className="ring-photo relative aspect-square w-[clamp(200px,44vw,320px)] rounded-full p-[7px] transition-transform duration-250 ease-out [transform:perspective(900px)_rotateX(var(--rx,0deg))_rotateY(var(--ry,0deg))]"
           ref={ringRef}
         >
-          <img className="relative z-[1] block size-full rounded-full border-[5px] border-bg object-cover object-[50%_20%]" src={photo} alt="Portrait of Hitesh Chaudhari" width="320" height="320" decoding="async" />
+          <img className="relative z-[1] block size-full rounded-full border-[5px] border-bg object-cover object-[50%_20%]" src={photo} alt="Hitesh Chaudhari, freelance full-stack software engineer in Bengaluru" width="320" height="320" decoding="async" />
         </div>
         {badges.map(([value, label], i) => (
           <div

@@ -7,7 +7,7 @@ export const profile: Profile = {
   hometown: 'Mumbai',
   email: 'chaudharihitesh57@gmail.com',
   phone: '+91 82689 46878',
-  status: 'Open to opportunities',
+  status: 'Open to freelance projects',
   tel: '+918268946878',
   // WhatsApp opens with this message already typed.
   whatsapp: 'https://wa.me/918268946878?text=' + encodeURIComponent('Hi Hitesh, I came across your portfolio and would like to connect.'),
@@ -34,23 +34,24 @@ export const roles: string[] = [
 export const navLinks: Pair[] = [
   ['about', 'About'],
   ['work', 'Experience'],
+  ['skills', 'Skills'],
   ['projects', 'Projects'],
   ['achievements', 'Achievements'],
-  ['skills', 'Skills'],
 ];
 // Every section, in page order. Used by the command menu (Ctrl/⌘ + K).
 export const sections: Pair[] = [
   ['about', 'About'],
   ['work', 'Experience'],
   ['process', 'How I work'],
-  ['projects', 'Projects'],
-  ['achievements', 'Achievements'],
   ['skills', 'Skills'],
   ['edu', 'Education'],
+  ['projects', 'Projects'],
+  ['achievements', 'Achievements'],
+  ['faq', 'Freelance FAQ'],
   ['contact', 'Contact'],
 ];
-export const spyIds: string[] = ['about', 'work', 'process', 'projects', 'achievements', 'skills', 'edu', 'contact'];
-export const spyMap: Record<string, string> = { process: 'work', edu: 'skills' };
+export const spyIds: string[] = ['about', 'work', 'process', 'skills', 'edu', 'projects', 'achievements', 'faq', 'contact'];
+export const spyMap: Record<string, string> = { process: 'work', edu: 'skills', faq: 'achievements' };
 
 export const badges: Pair[] = [
   ['110M+', 'users reached'],
