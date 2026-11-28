@@ -5,12 +5,10 @@ interface CounterProps {
   to: number;
   prefix?: string;
   suffix?: string;
-  /** "md" is the smaller size used inside stat tiles. */
-  size?: 'lg' | 'md';
 }
 
 /** Number that counts up from 0 when it scrolls into view. */
-export default function Counter({ to, prefix = '', suffix = '', size = 'lg' }: CounterProps) {
+export default function Counter({ to, prefix = '', suffix = '' }: CounterProps) {
   const reduced = usePrefersReducedMotion();
   const [ref, inView] = useInView<HTMLElement>({ threshold: 0.6 });
   const [value, setValue] = useState(0);
@@ -30,7 +28,7 @@ export default function Counter({ to, prefix = '', suffix = '', size = 'lg' }: C
   }, [inView, reduced, to]);
 
   return (
-    <b ref={ref} className={`block font-display leading-none font-extrabold tracking-[-.03em] ${size === 'md' ? 'mb-1 text-[clamp(1.9rem,1.3rem+1.4vw,2.5rem)]' : 'mb-2 text-[clamp(2rem,1rem+3vw,3.25rem)]'}`}>
+    <b ref={ref} className="counter">
       {prefix}{value}{suffix}
     </b>
   );

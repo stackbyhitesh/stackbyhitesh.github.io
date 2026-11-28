@@ -110,8 +110,8 @@ export function useTilt(areaRef: RefObject<HTMLElement>, targetRef: RefObject<HT
     if (reduced || !area || !target) return;
     const move = (e: PointerEvent) => {
       const r = area.getBoundingClientRect();
-      target.style.setProperty('--ry', ((e.clientX - r.left) / r.width - 0.5) * 16 + 'deg');
-      target.style.setProperty('--rx', -((e.clientY - r.top) / r.height - 0.5) * 16 + 'deg');
+      target.style.setProperty('--ry', ((e.clientX - r.left) / r.width - 0.5) * 7 + 'deg');
+      target.style.setProperty('--rx', -((e.clientY - r.top) / r.height - 0.5) * 7 + 'deg');
     };
     const leave = () => { target.style.setProperty('--rx', '0deg'); target.style.setProperty('--ry', '0deg'); };
     area.addEventListener('pointermove', move);

@@ -1,21 +1,39 @@
 import type { ReactNode } from 'react';
+import Reveal from './Reveal';
 
-interface Props {
+interface SectionProps {
   id: string;
   className?: string;
-  /** Thin gradient line at the top of the section. */
+  /** Hairline at the top of the section. */
   divider?: boolean;
   children: ReactNode;
 }
 
-/** Every page section: consistent spacing, anchor id and top divider line. */
-export default function Section({ id, className = '', divider = true, children }: Props) {
-  const line = divider
-    ? 'before:absolute before:inset-x-[8%] before:top-0 before:h-px before:bg-linear-to-r before:from-transparent before:via-line before:to-transparent'
-    : '';
+/** Every page section: consistent spacing, anchor id and a hairline at the top. */
+export default function Section({ id, className = '', divider = true, children }: SectionProps) {
   return (
-    <section id={id} className={`relative py-(--section) ${line} ${className}`.trim()}>
+    <section id={id} className={`section${divider ? ' section--rule' : ''} ${className}`.trim()}>
       {children}
     </section>
+  );
+}
+
+interface HeadProps {
+  /** Short section name, shown in the left gutter on wide screens. */
+  label: string;
+  title: ReactNode;
+  lead?: ReactNode;
+}
+
+/** Section heading: the name sits in the gutter, the headline takes the wide column. */
+export function SectionHead({ label, title, lead }: HeadProps) {
+  return (
+    <Reveal className="shead">
+      <p className="shead__label">{label}</p>
+      <div className="shead__body">
+        <h2>{title}</h2>
+        {lead && <p className="lead">{lead}</p>}
+      </div>
+    </Reveal>
   );
 }

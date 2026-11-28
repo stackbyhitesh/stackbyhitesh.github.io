@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react';
 import { navLinks, profile, spyIds, spyMap } from '../data';
 import { useScrollSpy } from '../hooks';
 import { useTheme } from '../context/ThemeContext';
-import { navLink, navLinkOn } from '../ui';
+import Logo from './Logo';
 import MagneticLink from './MagneticLink';
 
 const isMac = typeof navigator !== 'undefined' && /Mac|iPhone|iPad/.test(navigator.userAgent);
+const svgProps = { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round', 'aria-hidden': true } as const;
 
 interface Props {
   onOpenPalette: () => void;
@@ -16,7 +17,6 @@ export default function Nav({ onOpenPalette }: Props) {
   const [open, setOpen] = useState(false);
   const current = useScrollSpy(spyIds);
   const active = spyMap[current] || current;
-  const cls = (id: string) => `${navLink} ${active === id ? navLinkOn : ''}`;
 
   // Close the mobile menu with Escape, or when the window grows to desktop size.
   useEffect(() => {
@@ -29,83 +29,41 @@ export default function Nav({ onOpenPalette }: Props) {
   }, [open]);
 
   return (
-    <nav
-      aria-label="Main"
-      className="glass-2 sticky top-[calc(env(safe-area-inset-top,0px)+10px)] z-10 mx-auto mt-3 w-[calc(100%-2*var(--gutter))] max-w-[1040px] rounded-full print:hidden"
-    >
-      <div className="flex h-[58px] items-center justify-between pr-2 pl-4 xs:pr-3 xs:pl-6">
-        <a className="flex items-center gap-2.5 font-display text-[1.1rem] font-extrabold tracking-[-.02em] no-underline xs:text-[1.25rem]" href="#top">
-          <span aria-hidden="true" className="primary-grad grid size-8 place-items-center rounded-[10px] text-[.95rem] font-extrabold text-white">H</span>
-          <span>Hitesh<span className="text-grad">.dev</span></span>
+    <nav aria-label="Main" className="nav glass">
+      <div className="nav__bar">
+        <a className="brand" href="#top" aria-label="Hitesh Chaudhari, back to top">
+          <Logo size={36} className="brand__logo" />
+          <span className="brand__name">Hitesh <span className="brand__last">Chaudhari</span></span>
         </a>
-        <ul className="m-0 flex list-none items-center gap-0.5 p-0 xs:gap-1">
+        <ul className="nav__links">
           {navLinks.map(([id, label]) => (
-            <li key={id} className="hidden md:block">
-              <a className={cls(id)} href={`#${id}`} aria-current={active === id ? 'true' : undefined}>{label}</a>
-            </li>
+            <li key={id}><a href={`#${id}`} aria-current={active === id ? 'true' : undefined}>{label}</a></li>
           ))}
-          <li className="hidden md:block">
-            <button
-              type="button"
-              onClick={onOpenPalette}
-              aria-label={`Open quick menu (${isMac ? '⌘' : 'Ctrl'} K)`}
-              className="glass flex h-10 cursor-pointer items-center gap-2 rounded-full px-3 font-mono text-[.72rem] text-muted transition-colors hover:border-accent2 hover:text-ink"
-            >
-              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-              {isMac ? '⌘' : 'Ctrl'} K
-            </button>
-          </li>
-          <li>
-            <button type="button" className="icon-btn" onClick={toggle} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
-              {theme === 'dark' ? '☾' : '☀'}
-            </button>
-          </li>
-          <li>
-            <MagneticLink
-              className={`btn btn-primary px-4 py-2 text-[.92rem] xs:px-5 xs:py-[9px] ${current === 'contact' ? 'shadow-[0_0_0_3px_color-mix(in_srgb,var(--b)_55%,transparent)]' : ''}`}
-              href="#contact"
-            >
-              Connect
-            </MagneticLink>
-          </li>
-          <li className="md:hidden">
-            <button type="button" className="icon-btn" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
-              {open ? '✕' : '☰'}
-            </button>
-          </li>
         </ul>
+        <div className="nav__tools">
+          <button type="button" className="kbd-btn" onClick={onOpenPalette} aria-label={`Open quick menu (${isMac ? '⌘' : 'Ctrl'} K)`}>
+            <svg {...svgProps} width={15} height={15}><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            {isMac ? '⌘' : 'Ctrl'} K
+          </button>
+          <button type="button" className="icon-btn" onClick={toggle} aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}>
+            {theme === 'dark'
+              ? <svg {...svgProps}><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z" /></svg>
+              : <svg {...svgProps}><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>}
+          </button>
+          <MagneticLink className={`btn btn--primary btn--sm${current === 'contact' ? ' ulink--on' : ''}`} href="#contact">Connect</MagneticLink>
+          <button type="button" className="icon-btn nav__menu-btn" aria-label="Menu" aria-expanded={open} aria-controls="mobile-menu" onClick={() => setOpen((o) => !o)}>
+            {open ? <svg {...svgProps}><path d="M6 6l12 12M18 6 6 18" /></svg> : <svg {...svgProps}><path d="M4 8h16M4 16h16" /></svg>}
+          </button>
+        </div>
       </div>
-      <div
-        id="mobile-menu"
-        className={`glass absolute inset-x-0 top-[calc(100%+8px)] flex-col rounded-[22px] bg-bg2/90 p-2.5 shadow-[0_24px_50px_-20px_#000] md:hidden ${open ? 'flex' : 'hidden'}`}
-      >
+      <div id="mobile-menu" className="mobile-menu" data-open={open}>
         {navLinks.map(([id, label]) => (
-          <a
-            key={id}
-            className={`rounded-xl px-4 py-3.5 no-underline hover:bg-card ${active === id ? navLinkOn : 'text-ink'}`}
-            href={`#${id}`}
-            onClick={() => setOpen(false)}
-          >
-            {label}
-          </a>
+          <a key={id} href={`#${id}`} aria-current={active === id ? 'true' : undefined} onClick={() => setOpen(false)}>{label}</a>
         ))}
         {profile.resume && (
-          <a
-            className="flex items-center justify-between rounded-xl px-4 py-3.5 text-ink no-underline hover:bg-card"
-            href={profile.resume}
-            download="Hitesh_Chaudhari_Resume.pdf"
-            onClick={() => setOpen(false)}
-          >
-            Resume <span className="font-mono text-[.75rem] text-muted">PDF ↓</span>
-          </a>
+          <a href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf" onClick={() => setOpen(false)}>Resume <small>PDF</small></a>
         )}
-        <button
-          type="button"
-          className="flex items-center justify-between rounded-xl px-4 py-3.5 text-left text-ink hover:bg-card"
-          onClick={() => { setOpen(false); onOpenPalette(); }}
-        >
-          Search and shortcuts <span className="font-mono text-[.75rem] text-muted">⌕</span>
-        </button>
+        <button type="button" onClick={() => { setOpen(false); onOpenPalette(); }}>Search and shortcuts <small>{isMac ? '⌘' : 'Ctrl'} K</small></button>
       </div>
     </nav>
   );

@@ -1,16 +1,16 @@
-// Questions clients ask before hiring a freelance engineer. These are shown on the page (FAQ section) and also
+// Questions recruiters and hiring managers ask. These are shown on the page (FAQ section) and also
 // sent to search engines as FAQ structured data, so keep the answers short, factual and true.
 // This file must not import anything, because the build config reads it too.
 export interface Faq { q: string; a: string }
 
 export const faqs: Faq[] = [
   {
-    q: 'Are you available for freelance software engineering work?',
-    a: "Yes. I'm open to freelance and contract full-stack projects, from new web apps and APIs to performance work on an existing product. Send a short note through the contact form, email or WhatsApp with what you're building, your timeline and your budget range, and we can take it from there.",
+    q: 'Are you open to a new full-time role?',
+    a: "Yes. I'm open to full-time senior full-stack, tech lead and forward deployed engineering roles. Send a short note through the contact form, email or WhatsApp with the role, your team and the location, and I'll get back to you.",
   },
   {
-    q: 'What can a freelance full-stack engineer like you build?',
-    a: 'Web apps and dashboards in React, Next.js or Angular, backed by Node.js and TypeScript REST or GraphQL APIs and microservices. I have also built offline-first hybrid mobile apps with Ionic, integrated payments (Stripe, Razorpay) and single sign-on, and shipped AI features such as RAG assistants and LLM-powered tooling.',
+    q: 'What kind of roles are you looking for?',
+    a: 'Senior Software Engineer, Tech Lead and Forward Deployed Engineer roles where I can own products end to end: web apps and dashboards in React, Next.js or Angular, backed by Node.js and TypeScript REST or GraphQL APIs and microservices. I have also built offline-first mobile apps with Ionic, integrated payments (Stripe, Razorpay) and single sign-on, and shipped AI features such as RAG assistants and LLM-powered tooling.',
   },
   {
     q: 'How much experience do you have?',
@@ -26,6 +26,6 @@ export const faqs: Faq[] = [
   },
   {
     q: 'Where are you based, and which time zone do you work in?',
-    a: "I'm based in Bengaluru, India (IST, UTC+5:30), with Mumbai as my hometown. I'm happy to find overlap with your working hours.",
+    a: "I'm based in Bengaluru, India (IST, UTC+5:30), with Mumbai as my hometown. I'm happy to find overlap with your team's working hours.",
   },
 ];

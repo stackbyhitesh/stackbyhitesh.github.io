@@ -104,17 +104,10 @@ export default function CommandPalette({ open, onClose, onToggle }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 z-[65] grid place-items-start justify-items-center bg-[rgba(3,7,18,.7)] px-4 pt-[12vh] backdrop-blur-sm print:hidden" onMouseDown={onClose}>
-      <div
-        role="dialog"
-        aria-modal="true"
-        aria-label="Quick menu"
-        onKeyDown={onKeyDown}
-        onMouseDown={(e) => e.stopPropagation()}
-        className="glass animate-pop w-full max-w-[560px] overflow-hidden rounded-[20px] bg-bg2/95 shadow-[0_40px_90px_-30px_#000]"
-      >
-        <div className="flex items-center gap-3 border-b border-line px-4">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" className="flex-none text-muted" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+    <div className="palette-veil print-hide" onMouseDown={onClose}>
+      <div role="dialog" aria-modal="true" aria-label="Quick menu" onKeyDown={onKeyDown} onMouseDown={(e) => e.stopPropagation()} className="palette glass">
+        <div className="palette__search">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <input
             ref={inputRef}
             value={query}
@@ -127,29 +120,20 @@ export default function CommandPalette({ open, onClose, onToggle }: Props) {
             placeholder="Jump to a section or run an action…"
             autoComplete="off"
             spellCheck={false}
-            className="h-14 min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-muted"
           />
-          <kbd className="hidden rounded-md border border-line px-1.5 py-0.5 font-mono text-[.7rem] text-muted xs:block">Esc</kbd>
+          <kbd>Esc</kbd>
         </div>
-        <ul id="cmd-list" role="listbox" ref={listRef} className="m-0 max-h-[min(52vh,380px)] list-none overflow-y-auto p-2">
+        <ul id="cmd-list" role="listbox" ref={listRef} className="palette__list">
           {results.map((c, i) => (
-            <li
-              key={c.id}
-              id={`cmd-${c.id}`}
-              role="option"
-              aria-selected={i === active}
-              onMouseMove={() => setActive(i)}
-              onClick={() => run(c)}
-              className={`flex cursor-pointer items-center justify-between gap-3 rounded-xl px-3.5 py-3 text-[.95rem] ${i === active ? 'primary-grad text-white' : 'text-ink'}`}
-            >
+            <li key={c.id} id={`cmd-${c.id}`} role="option" aria-selected={i === active} onMouseMove={() => setActive(i)} onClick={() => run(c)} className="palette__item">
               <span>{c.label}</span>
-              <span className={`font-mono text-[.7rem] ${i === active ? 'text-white/80' : 'text-muted'}`}>{c.group}</span>
+              <small>{c.group}</small>
             </li>
           ))}
-          {results.length === 0 && <li className="px-3.5 py-6 text-center text-[.92rem] text-muted" role="presentation">Nothing matches "{query}".</li>}
+          {results.length === 0 && <li className="palette__empty" role="presentation">Nothing matches "{query}".</li>}
         </ul>
-        <p className="m-0 flex flex-wrap justify-between gap-2 border-t border-line px-4 py-2.5 font-mono text-[.7rem] text-muted">
-          <span>↑ ↓ to move · Enter to select</span>
+        <p className="palette__foot">
+          <span>↑ ↓ to move, Enter to select</span>
           <span>{isMac ? '⌘' : 'Ctrl'} K or / to open</span>
         </p>
       </div>

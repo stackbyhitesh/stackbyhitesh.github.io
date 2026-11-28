@@ -26,9 +26,7 @@ export default function App() {
 
   return (
     <>
-      <a className="fixed -left-[9999px] top-2 z-[100] rounded-[10px] bg-accent px-4 py-2.5 text-white no-underline focus:left-3" href="#top">Skip to content</a>
-      {/* Soft grid behind the top of the page */}
-      <div aria-hidden="true" className="dot-grid pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1000px] opacity-70 [mask-image:radial-gradient(ellipse_75%_65%_at_50%_0%,#000,transparent)] print:hidden" />
+      <a className="skip" href="#top">Skip to content</a>
       <ScrollProgress />
       <Nav onOpenPalette={openPalette} />
       <main className="wrap" id="top">

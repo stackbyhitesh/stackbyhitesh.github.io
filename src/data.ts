@@ -7,7 +7,7 @@ export const profile: Profile = {
   hometown: 'Mumbai',
   email: 'chaudharihitesh57@gmail.com',
   phone: '+91 82689 46878',
-  status: 'Open to freelance projects',
+  status: 'Open to new full-time roles',
   tel: '+918268946878',
   // WhatsApp opens with this message already typed.
   whatsapp: 'https://wa.me/918268946878?text=' + encodeURIComponent('Hi Hitesh, I came across your portfolio and would like to connect.'),
@@ -47,7 +47,7 @@ export const sections: Pair[] = [
   ['edu', 'Education'],
   ['projects', 'Projects'],
   ['achievements', 'Achievements'],
-  ['faq', 'Freelance FAQ'],
+  ['faq', 'Hiring FAQ'],
   ['contact', 'Contact'],
 ];
 export const spyIds: string[] = ['about', 'work', 'process', 'skills', 'edu', 'projects', 'achievements', 'faq', 'contact'];
@@ -172,12 +172,12 @@ export const steps: Pair[] = [
 ];
 
 export const projects: Project[] = [
-  { big: '−18%', title: 'Multi-layer caching', text: 'Frontend and Redis caching on a high-volume enterprise platform, cutting average API response time by up to 18%.', tags: ['Redis', 'Node.js', 'Performance'], categories: ['Performance', 'Backend'] },
-  { big: '−25%', title: 'RAG code assistant', text: 'An internal assistant built with prompt engineering that cut boilerplate development time by 25%, plus a custom Copilot agent that follows team conventions.', tags: ['RAG', 'LLM', 'Copilot'], categories: ['AI'] },
-  { big: '35K+', title: 'Smooth large-data UI', text: 'Virtual scroll, lazy loading and debounced input removed a page-freezing issue when rendering 35K+ records.', tags: ['Frontend', 'MUI', 'Tailwind'], categories: ['Performance', 'Frontend'] },
-  { big: 'CRM', title: 'Engineering CRM', text: 'Built from scratch on Node.js with a frontend UI: sprint tracking, workflow automation and reporting. Adopted by the whole team.', tags: ['Node.js', 'Automation', 'Reporting'], categories: ['Frontend', 'Backend'] },
-  { big: 'Offline', title: 'Offline-first mobile app', text: 'Cross-platform Ionic app with a Node.js backend, local persistence and background sync for unreliable networks.', tags: ['Ionic', 'iOS / Android', 'Sync'], categories: ['Mobile', 'Backend'] },
-  { big: 'Pay', title: 'Payments and SSO', text: 'Secure integrations of Bajaj Pay SDK, Stripe and Razorpay, with OAuth 2.0, JWT and SSO-based authentication.', tags: ['Stripe', 'Razorpay', 'SSO'], categories: ['Backend', 'Payments'] },
+  { slug: 'caching', big: '−18%', title: 'Multi-layer caching', text: 'Frontend and Redis caching on a high-volume enterprise platform, cutting average API response time by up to 18%.', tags: ['Redis', 'Node.js', 'Performance'], categories: ['Performance', 'Backend'] },
+  { slug: 'rag', big: '−25%', title: 'RAG code assistant', text: 'An internal assistant built with prompt engineering that cut boilerplate development time by 25%, plus a custom Copilot agent that follows team conventions.', tags: ['RAG', 'LLM', 'Copilot'], categories: ['AI'] },
+  { slug: 'large-data', big: '35K+', title: 'Smooth large-data UI', text: 'Virtual scroll, lazy loading and debounced input removed a page-freezing issue when rendering 35K+ records.', tags: ['Frontend', 'MUI', 'Tailwind'], categories: ['Performance', 'Frontend'] },
+  { slug: 'crm', big: 'CRM', title: 'Engineering CRM', text: 'Built from scratch on Node.js with a frontend UI: sprint tracking, workflow automation and reporting. Adopted by the whole team.', tags: ['Node.js', 'Automation', 'Reporting'], categories: ['Frontend', 'Backend'] },
+  { slug: 'offline', big: 'Offline', title: 'Offline-first mobile app', text: 'Cross-platform Ionic app with a Node.js backend, local persistence and background sync for unreliable networks.', tags: ['Ionic', 'iOS / Android', 'Sync'], categories: ['Mobile', 'Backend'] },
+  { slug: 'payments', big: 'Pay', title: 'Payments and SSO', text: 'Secure integrations of Bajaj Pay SDK, Stripe and Razorpay, with OAuth 2.0, JWT and SSO-based authentication.', tags: ['Stripe', 'Razorpay', 'SSO'], categories: ['Backend', 'Payments'] },
 ];
 
 export const marquee: string[][] = [
@@ -211,7 +211,7 @@ export const achievements: Achievement[] = [
 export const topics: string[] = ['Full-stack performance', 'AI-assisted development', 'Engineering leadership'];
 
 // Options in the "What's it about?" menu of the contact form.
-export const topicOptions: string[] = ['Just saying hello', 'A project idea', 'Collaboration', 'A question about my work', 'Something else'];
+export const topicOptions: string[] = ['A job opportunity', 'Just saying hello', 'Collaboration', 'A question about my work', 'Something else'];
 
 // Optional: add quotes (for example from LinkedIn recommendations, with permission) and a section appears.
 // Example: { quote: 'Hitesh made our dashboard fast again.', name: 'Name Surname', role: 'Role, Company' }

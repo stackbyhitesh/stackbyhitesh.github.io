@@ -44,11 +44,12 @@ const stubs = {
       contents: `export default ${JSON.stringify(builtUrl(args.path))};`,
       loader: 'js',
     }));
-    // import.meta.glob is Vite-only, so list the achievement images ourselves.
-    b.onLoad({ filter: /achievementImages\.ts$/ }, (args) => {
-      const dir = path.join(path.dirname(args.path), '../assets/achievements');
+    // import.meta.glob is Vite-only, so list the images in these folders ourselves.
+    b.onLoad({ filter: /(achievement|project)Images\.ts$/ }, (args) => {
+      const folder = /projectImages/.test(args.path) ? 'projects' : 'achievements';
+      const dir = path.join(path.dirname(args.path), '../assets', folder);
       const files = fs.existsSync(dir) ? fs.readdirSync(dir).filter((f) => /\.(jpe?g|png|webp|avif|gif)$/i.test(f)) : [];
-      const entries = files.map((f) => `${JSON.stringify(`../assets/achievements/${f}`)}: ${JSON.stringify(builtUrl(f))}`).join(',\n');
+      const entries = files.map((f) => `${JSON.stringify(`../assets/${folder}/${f}`)}: ${JSON.stringify(builtUrl(f))}`).join(',\n');
       const src = fs
         .readFileSync(args.path, 'utf8')
         .replace(/import\.meta\.glob<string>\([\s\S]*?\n\);/, `{\n${entries}\n} as Record<string, string>;`);

@@ -47,35 +47,30 @@ function reducer(state: State, action: Action): State {
 }
 
 // ---- Small pieces ----
-const linkRow =
-  'group glass flex min-w-0 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 text-left text-[.95rem] font-medium text-ink no-underline transition duration-200 hover:translate-x-1 hover:border-accent2';
-
 function LinkRow({ icon, title, action }: { icon: IconName; title: string; action: string }) {
   return (
     <>
-      <span className="grid size-10 flex-none place-items-center rounded-xl border border-accent2/25 bg-accent2/12 text-accent2 transition-colors group-hover:bg-accent2/22"><Icon name={icon} /></span>
-      <span className="min-w-0 flex-1 [overflow-wrap:anywhere]">{title}</span>
-      <span className="flex flex-none items-center gap-1 text-[.85rem] font-semibold text-accent2">{action}<Icon name="arrow" size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" /></span>
+      <span className="linkrow__icon"><Icon name={icon} size={18} /></span>
+      <span className="linkrow__title">{title}</span>
+      <span className="linkrow__act">{action}<Icon name="arrow" size={14} /></span>
     </>
   );
 }
 
-const errCls = 'mt-1.5 block text-[.8rem] text-[#c0262d] dark:text-[#ff8d8d]';
-
 /** Label + input with a small icon inside the field. */
 function Field({ label, icon, error, id, children }: { label: string; icon: IconName; error?: string; id: string; children: ReactNode }) {
   return (
-    <label className="block text-[.85rem] font-medium text-muted">
+    <label className="label">
       {label}
-      <span className="relative mt-1.5 block text-ink">
-        <Icon name={icon} size={17} className="pointer-events-none absolute top-1/2 left-3.5 -translate-y-1/2 text-muted" />
+      <span className="fieldwrap">
+        <Icon name={icon} size={17} />
         {children}
       </span>
-      {error && <span className={errCls} id={`err-${id}`} role="alert">{error}</span>}
+      {error && <span className="err" id={`err-${id}`} role="alert">{error}</span>}
     </label>
   );
 }
-const inputCls = 'field mt-0 pl-11';
+const inputCls = 'field';
 
 export default function Contact() {
   const [copyLabel, copyEmail] = useCopy(profile.email);
@@ -124,40 +119,38 @@ export default function Contact() {
 
   return (
     <Section id="contact">
-      <Reveal className="print-box panel relative grid gap-[clamp(28px,5vw,48px)] overflow-hidden rounded-[clamp(22px,3vw,32px)] p-[clamp(20px,5vw,56px)] before:pointer-events-none before:absolute before:-top-28 before:-right-24 before:size-96 before:rounded-full before:bg-accent/20 before:blur-3xl after:pointer-events-none after:absolute after:-bottom-32 after:-left-24 after:size-96 after:rounded-full after:bg-accent/10 after:blur-3xl md:grid-cols-[1fr_1.05fr] [&>*]:relative [&>*]:z-[1]">
-        <div>
-          <div className="kick">Contact</div>
-          <h2 className="mb-4 max-w-[14ch] text-[clamp(2rem,1rem+3vw,3.4rem)] font-extrabold">Let's build something <span className="text-grad">great</span>.</h2>
-          <p className="mb-5 max-w-[46ch] text-muted">Happy to chat about engineering, performance and AI-assisted development, or just to say hello. Send a message, or reach me directly:</p>
-          <div className="tag-list mb-6">{topics.map((t) => <span key={t}>{t}</span>)}</div>
-          <div className="grid gap-2.5">
-            <button type="button" className={linkRow} onClick={copyEmail}><LinkRow icon="mail" title={profile.email} action={copyLabel} /></button>
-            <a className={linkRow} href={`tel:${profile.tel}`}><LinkRow icon="phone" title={profile.phone} action="Call" /></a>
-            <ExternalLink className={linkRow} href={profile.whatsapp}><LinkRow icon="chat" title="WhatsApp" action="Chat" /></ExternalLink>
-            {profile.resume && <a className={linkRow} href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf"><LinkRow icon="file" title="Resume (PDF)" action="Download" /></a>}
-            <ExternalLink className={linkRow} href={profile.linkedin}><LinkRow icon="linkedin" title="LinkedIn" action="Connect" /></ExternalLink>
-            {profile.github && <ExternalLink className={linkRow} href={profile.github}><LinkRow icon="github" title="GitHub" action="Follow" /></ExternalLink>}
-            {profile.calendar && <ExternalLink className={linkRow} href={profile.calendar}><LinkRow icon="calendar" title="Book a 15-min call" action="Schedule" /></ExternalLink>}
+      <div className="contact">
+        <Reveal>
+          <p className="shead__label">Contact</p>
+          <h2>Let's build something great.</h2>
+          <p className="contact__lede">I'm open to new full-time roles in senior full-stack engineering, tech lead and forward deployed engineering. Tell me about the role and your team, or reach me directly:</p>
+          <div className="tag-list">{topics.map((t) => <span key={t}>{t}</span>)}</div>
+          <div className="links">
+            <button type="button" className="linkrow" onClick={copyEmail}><LinkRow icon="mail" title={profile.email} action={copyLabel} /></button>
+            <a className="linkrow" href={`tel:${profile.tel}`}><LinkRow icon="phone" title={profile.phone} action="Call" /></a>
+            <ExternalLink className="linkrow" href={profile.whatsapp}><LinkRow icon="chat" title="WhatsApp" action="Chat" /></ExternalLink>
+            {profile.resume && <a className="linkrow" href={profile.resume} download="Hitesh_Chaudhari_Resume.pdf"><LinkRow icon="file" title="Resume (PDF)" action="Download" /></a>}
+            <ExternalLink className="linkrow" href={profile.linkedin}><LinkRow icon="linkedin" title="LinkedIn" action="Connect" /></ExternalLink>
+            {profile.github && <ExternalLink className="linkrow" href={profile.github}><LinkRow icon="github" title="GitHub" action="Follow" /></ExternalLink>}
+            {profile.calendar && <ExternalLink className="linkrow" href={profile.calendar}><LinkRow icon="calendar" title="Book a 15-min call" action="Schedule" /></ExternalLink>}
           </div>
-        </div>
+        </Reveal>
 
-        <div className="glass-2 self-start rounded-3xl p-[clamp(20px,3vw,34px)] print:hidden">
+        <Reveal className="formcard glass print-hide" delay={90}>
           {status === 'sent' && sentTo ? (
-            <div className="grid content-center gap-3 py-6 text-center" role="status">
-              <div className="animate-pop mx-auto grid size-16 place-items-center rounded-full bg-accent2/20 text-accent2 shadow-[0_0_0_8px_color-mix(in_srgb,var(--b)_12%,transparent)]">
-                <Icon name="check" size={32} />
-              </div>
-              <h3 className="text-[1.5rem]">Message sent. Thank you, {sentTo.name.split(' ')[0]}!</h3>
-              <p className="mx-auto max-w-[36ch] text-muted">I'll reply to <strong className="text-ink [overflow-wrap:anywhere]">{sentTo.email}</strong> as soon as I can.</p>
-              <button type="button" className="btn btn-ghost mx-auto mt-3" onClick={() => dispatch({ type: 'reset' })}>Send another message</button>
+            <div className="sent" role="status">
+              <div className="sent__tick"><Icon name="check" size={30} /></div>
+              <h3>Message sent. Thank you, {sentTo.name.split(' ')[0]}!</h3>
+              <p>I'll reply to <strong>{sentTo.email}</strong> as soon as I can.</p>
+              <button type="button" className="btn btn--ghost" onClick={() => dispatch({ type: 'reset' })}>Send another message</button>
             </div>
           ) : (
-            <form className="grid gap-4" onSubmit={submit} noValidate>
+            <form className="form" onSubmit={submit} noValidate>
               <div>
-                <h3 className="text-[1.35rem]">Send me a message</h3>
-                <p className="mt-1 text-[.9rem] text-muted">It goes straight to my inbox.</p>
+                <h3>Send me a message</h3>
+                <p className="formcard__sub">It goes straight to my inbox.</p>
               </div>
-              <div className="grid items-start gap-4 xs:grid-cols-2">
+              <div className="form__row">
                 <Field label="Your name" icon="user" error={errors.name} id="name">
                   <input className={inputCls} value={values.name} onChange={change('name')} maxLength={LIMITS.name} autoComplete="name" placeholder="Asha Rao"
                     aria-invalid={Boolean(errors.name)} aria-describedby={errors.name ? 'err-name' : undefined} />
@@ -171,37 +164,37 @@ export default function Contact() {
                 <input className={inputCls} value={values.company} onChange={change('company')} maxLength={LIMITS.company} autoComplete="organization" placeholder="Where you work" />
               </Field>
 
-              <fieldset className="m-0 min-w-0 border-0 p-0">
-                <legend className="mb-2 p-0 text-[.85rem] font-medium text-muted">What's it about?</legend>
-                <div className="flex flex-wrap gap-2">
+              <fieldset className="topics">
+                <legend>What's it about?</legend>
+                <div>
                   {topicOptions.map((t) => (
-                    <label key={t} className="cursor-pointer">
-                      <input type="radio" name="topic" className="peer sr-only" value={t} checked={values.topic === t} onChange={() => dispatch({ type: 'change', field: 'topic', value: t })} />
-                      <span className="block rounded-full border border-line bg-card px-3.5 py-2 text-[.85rem] text-muted transition-colors peer-checked:primary-grad peer-checked:border-transparent peer-checked:text-white peer-checked: peer-focus-visible:outline-3 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-accent2 hover:text-ink peer-checked:hover:text-white">{t}</span>
+                    <label key={t}>
+                      <input type="radio" name="topic" value={t} checked={values.topic === t} onChange={() => dispatch({ type: 'change', field: 'topic', value: t })} />
+                      <span>{t}</span>
                     </label>
                   ))}
                 </div>
               </fieldset>
 
-              <label className="block text-[.85rem] font-medium text-muted">
+              <label className="label">
                 Your message
-                <textarea className="field min-h-[130px] resize-y" rows={5} value={values.message} onChange={change('message')} maxLength={LIMITS.message}
-                  placeholder="Tell me a little about what you have in mind…"
+                <textarea className="field" rows={5} value={values.message} onChange={change('message')} maxLength={LIMITS.message}
+                  placeholder="Tell me about the role and your team…"
                   aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? 'err-message' : undefined} />
-                <span className="mt-1 flex justify-between gap-3">
-                  <span>{errors.message && <span className={errCls} id="err-message" role="alert">{errors.message}</span>}</span>
-                  <span className="font-mono text-[.72rem] text-muted">{values.message.length}/{LIMITS.message}</span>
+                <span className="form__meta">
+                  <span>{errors.message && <span className="err" id="err-message" role="alert">{errors.message}</span>}</span>
+                  <span>{values.message.length}/{LIMITS.message}</span>
                 </span>
               </label>
 
               {/* Hidden spam trap: people never see or fill this in, bots often do. */}
-              <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
+              <div className="trap" aria-hidden="true">
                 <label>Leave this empty<input ref={trap} name="website" tabIndex={-1} autoComplete="off" /></label>
               </div>
 
-              <button className="btn btn-primary w-full gap-2.5 py-4 text-[1.02rem]" type="submit" disabled={status === 'sending'}>
+              <button className="btn btn--primary" type="submit" disabled={status === 'sending'}>
                 {status === 'sending' ? (
-                  <><span className="size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" aria-hidden="true" />Sending…</>
+                  <><span className="spinner" aria-hidden="true" />Sending…</>
                 ) : (
                   <>Send message <Icon name="send" size={18} /></>
                 )}
@@ -209,16 +202,16 @@ export default function Contact() {
 
               <div aria-live="polite">
                 {status === 'error' && (
-                  <p className="m-0 rounded-xl border border-[#ff6b6b]/50 bg-card px-3.5 py-3 text-[.92rem] text-ink" role="alert">
+                  <p className="alert" role="alert">
                     {message} Your message is saved here, so you can try again, or{' '}
-                    <a className="text-accent2 underline" href={buildMailto(profile.email, values)}>email me directly</a>.
+                    <a href={buildMailto(profile.email, values)}>email me directly</a>.
                   </p>
                 )}
               </div>
             </form>
           )}
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </Section>
   );
 }

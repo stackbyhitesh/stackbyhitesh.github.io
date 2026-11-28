@@ -15,5 +15,5 @@ export default function ScrollProgress() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-  return <div className="fixed inset-x-0 top-0 z-40 h-[3px] origin-left scale-x-0 bg-accent print:hidden" ref={ref} />;
+  return <div className="progress" ref={ref} aria-hidden="true" />;
 }

@@ -1,8 +1,9 @@
-import Reveal from './Reveal';
 import { jobs } from '../data';
-import { formatDuration, monthIndex, monthsBetween } from '../lib/experience';
+import { formatDuration, getExperience, monthIndex, monthsBetween } from '../lib/experience';
 
-/** A simple time chart: one bar per job, so the whole career path can be understood at a glance. */
+export const jobId = (company: string): string => 'job-' + company.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+
+/** The career as a time chart, one bar per job. Each row jumps to that role below. */
 export default function CareerChart() {
   const now = new Date();
   const nowIdx = now.getFullYear() * 12 + now.getMonth() + 1;
@@ -14,43 +15,38 @@ export default function CareerChart() {
   // Hide the first year label when the next year starts right after it (they would overlap).
   const showFirstYear = years.length === 0 || pct(years[0] * 12) > 9;
 
-  const summary = jobs
-    .map((j) => `${j.company}, ${j.role}, ${formatDuration(monthsBetween(j.start, j.end))}${j.now ? ' (current)' : ''}`)
-    .join('. ');
-
   return (
-    <Reveal className="print-box panel mb-[clamp(28px,4vw,40px)] px-[clamp(16px,2.6vw,28px)] pt-5 pb-[22px]" role="img" aria-label={`Career path. ${summary}.`}>
-      <p className="mb-3.5 font-mono text-[.74rem] font-medium tracking-[.12em] text-muted uppercase" aria-hidden="true">Career at a glance</p>
-      <div className="grid gap-2" aria-hidden="true">
-        <div className="relative h-[18px] sm:ml-[162px]">
-          {showFirstYear && <span className="absolute top-0 left-0 font-mono text-[.7rem] font-medium text-muted">{firstYear}</span>}
-          {years.map((y) => (
-            <span className="absolute top-0 -translate-x-1/2 font-mono text-[.7rem] font-medium text-muted" key={y} style={{ left: `${pct(y * 12)}%` }}>{y}</span>
-          ))}
-        </div>
-        {jobs.map((j) => {
-          const left = pct(monthIndex(j.start));
-          const endIdx = j.end ? monthIndex(j.end) : nowIdx;
-          const width = pct(endIdx) - left;
-          const label = formatDuration(monthsBetween(j.start, j.end));
-          // Bars that end near the right edge get their label on the left, so it is not cut off.
-          const labelStyle = left + width > 86 ? { right: `calc(${100 - left}% + 8px)` } : { left: `calc(${left + width}% + 8px)` };
-          return (
-            <div className="grid items-center gap-1 sm:grid-cols-[150px_1fr] sm:gap-3" key={j.company}>
-              <span className="text-[.85rem] leading-tight font-semibold sm:text-[.9rem]">{j.company}</span>
-              <span className="relative h-4">
-                {years.map((y) => <i className="absolute -top-1 -bottom-1 w-px bg-line" key={y} style={{ left: `${pct(y * 12)}%` }} />)}
-                <span
-                  className={`absolute inset-y-0.5 min-w-1.5 rounded-full ${j.now ? 'bg-warm' : 'bg-accent'}`}
-                  style={{ left: `${left}%`, width: `${width}%` }}
-                  title={`${j.company}: ${j.period}`}
-                />
-                <span className="absolute top-0 font-mono text-[.72rem] leading-4 whitespace-nowrap text-muted" style={labelStyle}>{label}</span>
-              </span>
-            </div>
-          );
-        })}
+    <div className="career glass">
+      <div className="career__head">
+        <p className="career__title">Career at a glance</p>
+        <p className="career__facts">{jobs.length} companies, {getExperience().exact}</p>
       </div>
-    </Reveal>
+      <div className="career__grid">
+        <div className="career__years" aria-hidden="true">
+          {showFirstYear && <span style={{ left: 0 }}>{firstYear}</span>}
+          {years.map((y) => <span key={y} style={{ left: `${pct(y * 12)}%` }}>{y}</span>)}
+        </div>
+        <div className="career__list">
+          {jobs.map((j) => {
+            const left = pct(monthIndex(j.start));
+            const endIdx = j.end ? monthIndex(j.end) : nowIdx;
+            const width = pct(endIdx) - left;
+            const label = formatDuration(monthsBetween(j.start, j.end));
+            // Bars that end near the right edge get their label on the left, so it is not cut off.
+            const labelStyle = left + width > 86 ? { right: `calc(${100 - left}% + 8px)` } : { left: `calc(${left + width}% + 8px)` };
+            return (
+              <a key={j.company} href={`#${jobId(j.company)}`} className="career__row" aria-label={`${j.company}, ${j.role}, ${label}. Jump to this role.`}>
+                <span className="career__name">{j.company}<small>{j.role}</small></span>
+                <span className="career__track" aria-hidden="true">
+                  {years.map((y) => <i key={y} style={{ left: `${pct(y * 12)}%` }} />)}
+                  <span className={`career__bar${j.now ? ' career__bar--now' : ''}`} style={{ left: `${left}%`, width: `${width}%` }} />
+                  <span className="career__dur" style={labelStyle}>{label}</span>
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </div>
   );
 }

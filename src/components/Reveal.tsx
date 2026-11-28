@@ -1,10 +1,10 @@
 import type { CSSProperties, ElementType, HTMLAttributes, PointerEvent, ReactNode } from 'react';
 import { useInView, usePrefersReducedMotion } from '../hooks';
 
-const IS_CARD = /(^|\s)card(\s|$)/;
-export const stagger = (index: number): number => (index % 4) * 80;
+const IS_SPOT = /(^|\s)project(\s|$)/;
+export const stagger = (index: number): number => (index % 4) * 70;
 
-// Cards get a soft light that follows the pointer.
+// Project cards get a soft light that follows the pointer across the screenshot frame.
 function moveGlow(e: PointerEvent<HTMLElement>) {
   const el = e.currentTarget;
   const r = el.getBoundingClientRect();
@@ -30,7 +30,7 @@ export default function Reveal({ as: Tag = 'div', className = '', delay = 0, chi
       ref={ref}
       className={`reveal${shown ? ' in' : ''} ${className}`.trim()}
       style={delay ? ({ ...style, '--d': `${delay}ms` } as CSSProperties) : style}
-      onPointerMove={IS_CARD.test(className) ? moveGlow : undefined}
+      onPointerMove={IS_SPOT.test(className) ? moveGlow : undefined}
       {...rest}
     >
       {children}

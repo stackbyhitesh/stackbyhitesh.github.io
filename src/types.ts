@@ -64,6 +64,8 @@ export interface Job {
 }
 
 export interface Project {
+  /** File name (without extension) of a screenshot in src/assets/projects. Without a file, an interface illustration is shown. */
+  slug?: string;
   big: string;
   title: string;
   text: string;

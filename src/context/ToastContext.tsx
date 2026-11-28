@@ -20,12 +20,8 @@ export function ToastProvider({ children }: { children: ReactNode }) {
   return (
     <ToastContext.Provider value={value}>
       {children}
-      <div role="status" aria-live="polite" className="pointer-events-none fixed inset-x-0 bottom-[calc(24px+env(safe-area-inset-bottom,0px))] z-[70] flex justify-center print:hidden">
-        {message && (
-          <p key={id} className="glass animate-toast m-0 rounded-full bg-bg2/90 px-5 py-3 text-[.92rem] font-medium whitespace-nowrap text-ink shadow-[0_20px_40px_-20px_#000]">
-            {message}
-          </p>
-        )}
+      <div role="status" aria-live="polite" className="toast-zone">
+        {message && <p key={id} className="toast glass">{message}</p>}
       </div>
     </ToastContext.Provider>
   );

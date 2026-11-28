@@ -3,22 +3,11 @@
 // with the <title> and description meta tag in index.html (a quick way: search this repo for the old text).
 import { faqs } from './src/faqs';
 
-export const TITLE = 'Freelance Full-Stack Software Engineer | Hitesh Chaudhari';
+export const TITLE = 'Senior Full-Stack Software Engineer | Hitesh Chaudhari';
 export const DESCRIPTION =
-  'Freelance full-stack software engineer in Bengaluru, India. 8+ years building React, Node.js and TypeScript apps used by 110M+ people. Open to projects.';
+  'Senior full-stack software engineer and tech lead in Bengaluru, India. 8+ years building React, Node.js and TypeScript apps used by 110M+ people. Open to new full-time roles.';
 export const SOCIAL_DESCRIPTION =
-  'Freelance full-stack software engineer and tech lead. React, Node.js, TypeScript, performance and AI-assisted development for startups and enterprises.';
-
-/** Services shown to Google as what this person offers. Keep these true to the work on the site. */
-const SERVICES = [
-  'Freelance full-stack web application development',
-  'React, Next.js and Angular frontend development',
-  'Node.js and TypeScript API and microservices development',
-  'Web performance and API optimisation',
-  'Payment gateway and single sign-on integration',
-  'AI-assisted development: RAG assistants and LLM tooling',
-  'Technical leadership and code review',
-];
+  'Senior full-stack software engineer and tech lead. React, Node.js, TypeScript, performance and AI-assisted development. Open to new full-time roles.';
 
 export const buildJsonLd = (site: string) => {
   const person = `${site}#hitesh`;
@@ -31,7 +20,7 @@ export const buildJsonLd = (site: string) => {
         name: 'Hitesh Chaudhari',
         url: site,
         image: `${site}og-image.png`,
-        jobTitle: 'Freelance Full-Stack Software Engineer',
+        jobTitle: 'Senior Full-Stack Software Engineer',
         description: DESCRIPTION,
         worksFor: { '@type': 'Organization', name: 'OpenText' },
         address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', addressCountry: 'IN' },
@@ -46,36 +35,16 @@ export const buildJsonLd = (site: string) => {
           skills: 'React, Next.js, Angular, Node.js, TypeScript, REST APIs, GraphQL, microservices, Redis, AWS, performance engineering, RAG',
         },
         knowsAbout: [
-          'Freelance software engineering', 'Full-stack development', 'React', 'Next.js', 'Angular', 'Node.js', 'TypeScript',
+          'Software engineering', 'Full-stack development', 'React', 'Next.js', 'Angular', 'Node.js', 'TypeScript',
           'REST APIs', 'GraphQL', 'Microservices', 'Performance engineering', 'AI-assisted development', 'Retrieval-augmented generation',
         ],
         sameAs: ['https://linkedin.com/in/eng-hitesh-chaudhari', 'https://stackbyhitesh.github.io/'],
       },
       {
-        '@type': 'ProfessionalService',
-        '@id': `${site}#service`,
-        name: 'Hitesh Chaudhari | Freelance Software Engineering',
-        url: site,
-        image: `${site}og-image.png`,
-        description: DESCRIPTION,
-        provider: { '@id': person },
-        founder: { '@id': person },
-        address: { '@type': 'PostalAddress', addressLocality: 'Bengaluru', addressRegion: 'Karnataka', addressCountry: 'IN' },
-        areaServed: [{ '@type': 'Country', name: 'India' }, 'Remote (worldwide)'],
-        availableLanguage: ['English'],
-        serviceType: 'Freelance software engineering',
-        knowsAbout: ['React', 'Node.js', 'TypeScript', 'Full-stack development', 'Performance engineering'],
-        hasOfferCatalog: {
-          '@type': 'OfferCatalog',
-          name: 'Freelance software engineering services',
-          itemListElement: SERVICES.map((name) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name } })),
-        },
-      },
-      {
         '@type': 'WebSite',
         '@id': `${site}#website`,
         url: site,
-        name: 'Hitesh Chaudhari | Freelance Software Engineer',
+        name: 'Hitesh Chaudhari | Senior Full-Stack Software Engineer',
         inLanguage: 'en',
         publisher: { '@id': person },
       },

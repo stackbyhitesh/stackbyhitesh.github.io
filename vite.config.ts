@@ -32,7 +32,7 @@ const injectCsp = (): Plugin => ({
 const rawSite = (process.env.SITE_URL ?? 'https://stackbyhitesh.github.io/').trim();
 const SITE = rawSite ? rawSite.replace(/\/*$/, '/') : '';
 
-const IMAGE_ALT = 'Hitesh Chaudhari, freelance full-stack software engineer and tech lead. Portfolio preview card.';
+const IMAGE_ALT = 'Hitesh Chaudhari, senior full-stack software engineer and tech lead. Portfolio preview card.';
 
 // Structured data (JSON-LD) is built in seo.config.ts so Google can understand who the site is about and what they offer.
 const jsonLd = () => JSON.stringify(buildJsonLd(SITE));

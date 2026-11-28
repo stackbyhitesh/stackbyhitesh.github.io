@@ -25,7 +25,7 @@ export function TechIcons({ name, size = 14 }: IconsProps) {
               height={size}
               aria-hidden="true"
               focusable="false"
-              className="shrink-0 text-accent2"
+              className="tech-stroke"
               fill="none"
               stroke="currentColor"
               strokeWidth={2}
@@ -43,7 +43,7 @@ export function TechIcons({ name, size = 14 }: IconsProps) {
             height={size}
             aria-hidden="true"
             focusable="false"
-            className="shrink-0"
+            className="tech-logo"
             fill={icon.color === 'ink' ? 'currentColor' : icon.color}
           >
             {icon.paths.map((p, i) => <path key={i} d={p.d} fillRule={p.evenodd ? 'evenodd' : undefined} />)}
