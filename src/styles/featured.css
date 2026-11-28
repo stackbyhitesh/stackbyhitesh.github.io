@@ -1,0 +1,25 @@
+/* =========================================================
+   Skills strip: logos in quiet tiles, core technologies first
+   ========================================================= */
+.skillstrip { display: grid; align-items: center; gap: 22px 18px; }
+@media (min-width: 75rem) { .skillstrip { grid-template-columns: minmax(200px, auto) auto 1px auto; justify-content: space-between; gap: 18px 14px; } }
+.mhead { align-items: flex-start; }
+.mhead__title { font-size: clamp(1.45rem, 1.1rem + 1.1vw, 1.95rem); }
+.tiles { display: flex; flex-wrap: wrap; gap: clamp(8px, 1vw, 14px); }
+@media (min-width: 75rem) { .tiles { flex-wrap: nowrap; } }
+.tile { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; width: clamp(76px, 6.4vw, 100px); aspect-ratio: 1 / .93; border-radius: 18px; background: var(--tile); border: 1px solid var(--glass-line); box-shadow: var(--shadow-sm); font-size: .8rem; font-weight: 500; color: var(--ink); transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+.tile svg { width: 30px; height: 30px; }
+.tile .tech-logo[fill="currentColor"] { color: var(--ink); }
+@media (hover: hover) { .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); } }
+.skillstrip__sep { display: none; align-self: stretch; width: 1px; background: var(--line-strong); }
+@media (min-width: 75rem) { .skillstrip__sep { display: block; height: 76px; align-self: center; } }
+@media (max-width: 30rem) {
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .tiles + .skillstrip__sep + .tiles { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .tile { width: auto; aspect-ratio: 1 / 1.05; gap: 7px; font-size: .68rem; }
+  .tile svg { width: 24px; height: 24px; }
+}
+
+
+
+.skillstrip + .skillgrid { margin-top: clamp(22px, 3vw, 36px); }

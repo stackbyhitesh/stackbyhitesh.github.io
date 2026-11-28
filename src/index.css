@@ -1,0 +1,10 @@
+/* Tailwind is kept for its base reset (and so utilities still work if you add any). The design itself is plain,
+   hand-written CSS with semantic class names, split by area in ./styles. */
+@import "tailwindcss";
+
+@import "./styles/base.css";
+@import "./styles/nav.css";
+@import "./styles/hero.css";
+@import "./styles/featured.css";
+@import "./styles/sections.css";
+@import "./styles/site.css";
